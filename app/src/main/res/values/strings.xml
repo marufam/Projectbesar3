@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Projectbesar2</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="GPSAlertDialogTitle">Alert TItle</string>
+    <string name="GPSAlertDialogMessage">Alert Message</string>
+</resources>

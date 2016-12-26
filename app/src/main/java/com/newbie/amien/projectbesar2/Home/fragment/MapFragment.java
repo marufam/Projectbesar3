@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -24,6 +25,7 @@ import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.newbie.amien.projectbesar2.Home.adapter.KostAdapter;
 import com.newbie.amien.projectbesar2.Home.model.Kost;
@@ -83,12 +85,6 @@ public class MapFragment extends Fragment {
                 // For showing a move to my location button
                 if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     // TODO: Consider calling
-                    //    ActivityCompat#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for ActivityCompat#requestPermissions for more details.
                     return;
                 }
                 googleMap.setMyLocationEnabled(true);
@@ -99,9 +95,13 @@ public class MapFragment extends Fragment {
                 googleMap.addMarker(new MarkerOptions().position(forsa).title("Kost Malang Murah").snippet("700rb").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
                 cameraPosition = new CameraPosition.Builder().target(forsa).zoom(12).build();
 
-                LatLng hamas = new LatLng(-7.966870, 112.634990);
-                googleMap.addMarker(new MarkerOptions().position(hamas).title("Kost Malang Murah2").snippet("800rb").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
-                cameraPosition = new CameraPosition.Builder().target(hamas).zoom(12).build();
+                googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                    @Override
+                    public boolean onMarkerClick(Marker marker) {
+                        Toast.makeText(getContext(), "jhjhjhjhj", Toast.LENGTH_SHORT).show();
+                        return false;
+                    }
+                });
                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
             }
         });

@@ -15,7 +15,8 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAJpupVCuAmG__V8dg5gWY9Md3Mc8f3Ylg" />
-        <activity android:name=".MainActivity">
+
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,6 +24,8 @@
             </intent-filter>
 
         </activity>
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".ScrollingActivity"></activity>
     </application>
 
 

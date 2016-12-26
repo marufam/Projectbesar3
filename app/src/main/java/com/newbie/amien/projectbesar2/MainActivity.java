@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-//        di gae DrawerLayout sama NavigationView
+//        di gae DrawerLayout sama NavigationView /////
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         mNavigationView = (NavigationView) findViewById(R.id.shitstuff);
 
@@ -42,12 +42,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 mDrawerLayout.closeDrawers();
-                if(menuItem.getItemId()==R.id.nav_item_sent){
+                if(menuItem.getItemId()==R.id.nav_item_login){
                     FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.containerView, new MapFragment()).commit();
                 }
 
-                if (menuItem.getItemId()==R.id.nav_item_inbox){
+                if (menuItem.getItemId()==R.id.nav_item_home){
                     FragmentTransaction xframentTransaction = mFragmentManager.beginTransaction();
                     xframentTransaction.replace(R.id.containerView, new TabFragment()).commit();
                 }

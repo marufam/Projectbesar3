@@ -18,12 +18,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:background="@color/orange"
-                android:id="@+id/gambar_kost"/>
+                android:id="@+id/gambar_kost"
+                android:scaleType="centerCrop"
+                />
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#c237474f"
-                android:id="@+id/harga_kost"
+                android:id="@+id/harga_l"
                 android:orientation="vertical"
                 android:layout_above="@+id/txt_namakost"
                 android:padding="10dp"
@@ -34,11 +36,12 @@
                     android:text="Rp. 750rb"
                     android:textSize="10dp"
                     android:textColor="@color/white"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:id="@+id/harga_kost"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="/month"
+                    android:text="/bulan"
                     android:textSize="10dp"
                     android:textColor="@color/white"/>
             </LinearLayout>

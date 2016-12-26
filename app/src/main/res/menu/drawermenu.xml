@@ -3,39 +3,43 @@
 
 
     <item android:title=""></item>
-    <item android:title="Inbox"
-        android:id="@+id/nav_item_inbox"
-        android:icon="@drawable/inbox"
+    <item android:title="Home"
+        android:id="@+id/nav_item_home"
+        android:icon="@drawable/senta"
        />
+    <item android:title="History"
+        android:id="@+id/nav_item_history"
+        android:icon="@drawable/draft"
+        />
 
-    <item android:title="Sent"
-        android:id="@+id/nav_item_sent"
+    <item android:title="Login"
+        android:id="@+id/nav_item_login"
         android:icon="@drawable/sent"/>
 
-    <item android:title="Drafts"
-        android:id="@+id/nav_item_draft"
-        android:icon="@drawable/draft"/>
+    <!--<item android:title="Drafts"-->
+        <!--android:id="@+id/nav_item_draft"-->
+        <!--android:icon="@drawable/draft"/>-->
 
 
 
-    <item android:title="Others">
-        <menu>
-            <item
-                android:title="Spam"
-                android:icon="@drawable/spam"/>
-            <item
-                android:title="Bin"
-                android:icon="@drawable/bin"/>
-        </menu>
-    </item>
+    <!--<item android:title="Others">-->
+        <!--<menu>-->
+            <!--<item-->
+                <!--android:title="Spam"-->
+                <!--android:icon="@drawable/spam"/>-->
+            <!--<item-->
+                <!--android:title="Bin"-->
+                <!--android:icon="@drawable/bin"/>-->
+        <!--</menu>-->
+    <!--</item>-->
 
-    <group android:id="@+id/group_settings_id">
+    <!--<group android:id="@+id/group_settings_id">-->
 
-        <item android:title="Settings"
-            android:icon="@drawable/settings"/>
-        <item android:title="Help"
-            android:icon="@drawable/help"/>
-    </group>
+        <!--<item android:title="Settings"-->
+            <!--android:icon="@drawable/settings"/>-->
+        <!--<item android:title="Help"-->
+            <!--android:icon="@drawable/help"/>-->
+    <!--</group>-->
 
 
 </menu>

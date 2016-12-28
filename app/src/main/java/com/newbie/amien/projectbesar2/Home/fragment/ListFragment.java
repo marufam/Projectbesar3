@@ -5,19 +5,26 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+
 
 import com.newbie.amien.projectbesar2.Home.adapter.KostAdapter;
-import com.newbie.amien.projectbesar2.Home.model.Kost;
+
 import com.newbie.amien.projectbesar2.R;
-import com.newbie.amien.projectbesar2.data.repository.KostDataRepository;
+import com.newbie.amien.projectbesar2.data.rest.ApiClient;
+import com.newbie.amien.projectbesar2.data.rest.ApiInterface;
+import com.newbie.amien.projectbesar2.data.retrofit.GetKost;
+import com.newbie.amien.projectbesar2.data.retrofit.Kost;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by amien on 11/12/16.
@@ -28,8 +35,7 @@ public class ListFragment extends Fragment {
     private RecyclerView.Adapter mAdapter;
     private List<Kost> myKosts=new ArrayList<>();
     private Kost kost;
-    private SearchView searchview;
-
+    ApiInterface mApiInterface;
 
     @Nullable
     @Override
@@ -41,29 +47,34 @@ public class ListFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        KostDataRepository jsonkost = new KostDataRepository();
-        Toast.makeText(getContext(), ""+jsonkost.kostList().get(0).getNama_kost(), Toast.LENGTH_SHORT).show();
-        System.out.println("===========================================+>>>>>>>>>>>>>>>>>>>>>"+jsonkost.kostList().size());
         recyclerView = (RecyclerView) getView().findViewById(R.id.my_recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        for (int i=0; i<jsonkost.kostList().size(); i++){
-            kost= new Kost(jsonkost.kostList().get(i).getId()
-                    ,jsonkost.kostList().get(i).getNama_kost(),
-                    jsonkost.kostList().get(i).getAlamat(),
-                    jsonkost.kostList().get(i).getFasilias(),
-                    jsonkost.kostList().get(i).getHarga(),
-                    jsonkost.kostList().get(i).getKeterangan(),
-                    jsonkost.kostList().get(i).getJumlah_kamar(),
-                    jsonkost.kostList().get(i).getTersedia(),
-                    jsonkost.kostList().get(i).getLongtitude(),
-                    jsonkost.kostList().get(i).getLatitude(),
-                    jsonkost.kostList().get(i).getImage());
-            myKosts.add(kost);
-        }
 
-        mAdapter = new KostAdapter(myKosts);
-        recyclerView.setAdapter(mAdapter);
+
+        mApiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<GetKost> kostCall = mApiInterface.getKost();
+        kostCall.enqueue(new Callback<GetKost>() {
+            @Override
+            public void onResponse(Call<GetKost> call, Response<GetKost> response) {
+                List<com.newbie.amien.projectbesar2.data.retrofit.Kost> kostList = response.body().getKost();
+                Log.d("Retrofit Get", "Jumlah data pembelian: " +
+                        String.valueOf(kostList.size()));
+                List<com.newbie.amien.projectbesar2.data.retrofit.Kost> r_kostlist = response.body().getKost();
+                mAdapter = new KostAdapter(r_kostlist);
+                recyclerView.setAdapter(mAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<GetKost> call, Throwable t) {
+                Log.e("Retrofit Get", t.toString());
+            }
+
+
+        });
+
+
+
 
 //        searchview = (SearchView) getView().findViewById(R.id.searchViewList);
 

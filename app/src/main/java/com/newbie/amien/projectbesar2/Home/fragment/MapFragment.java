@@ -28,8 +28,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.newbie.amien.projectbesar2.Home.adapter.KostAdapter;
-import com.newbie.amien.projectbesar2.Home.model.Kost;
+
 import com.newbie.amien.projectbesar2.R;
+import com.newbie.amien.projectbesar2.data.retrofit.Kost;
 
 import java.util.ArrayList;
 import java.util.List;

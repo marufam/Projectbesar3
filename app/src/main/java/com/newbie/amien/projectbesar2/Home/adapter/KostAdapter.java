@@ -13,9 +13,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.newbie.amien.projectbesar2.Home.model.Kost;
+
 import com.newbie.amien.projectbesar2.R;
 import com.newbie.amien.projectbesar2.ScrollingActivity;
+import com.newbie.amien.projectbesar2.data.retrofit.Kost;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -51,42 +52,42 @@ public class KostAdapter extends RecyclerView.Adapter<KostAdapter.ListItemViewHo
     public void onBindViewHolder(ListItemViewHolder viewHolder, int position) {
 //        context = viewHolder.imageView.getContext();
         final Kost model = items.get(position);
-        viewHolder.nama_kost.setText(String.valueOf(model.nama_kost));
+        viewHolder.nama_kost.setText(String.valueOf(model.getNamaKost()));
         Picasso.with(viewHolder.imageView.getContext())
                 .load(model.getImage())
                 .into(viewHolder.imageView);
         String harga = null;
         //Toast.makeText(context, ""+, Toast.LENGTH_SHORT).show();
-        if(model.harga.length()>=7){
-            harga = model.harga.substring(0,1);
-            if(model.harga.substring(1,2).equals("0")==false){
-                harga+=","+model.harga.substring(1,2)+"jt";
+        if(model.getHarga().length()>=7){
+            harga = model.getHarga().substring(0,1);
+            if(model.getHarga().substring(1,2).equals("0")==false){
+                harga+=","+model.getHarga().substring(1,2)+"jt";
             }else{
                 harga+="jt";
             }
 
-        }else if(model.harga.length()>=6){
-            harga = model.harga.substring(0,3)+"rb";
-        }else if(model.harga.length()>=5){
-            harga = model.harga.substring(0,2)+"rb";
-        }else if(model.harga.length()>=4){
-            harga = model.harga.substring(0,1)+"rb";
+        }else if(model.getHarga().length()>=6){
+            harga = model.getHarga().substring(0,3)+"rb";
+        }else if(model.getHarga().length()>=5){
+            harga = model.getHarga().substring(0,2)+"rb";
+        }else if(model.getHarga().length()>=4){
+            harga = model.getHarga().substring(0,1)+"rb";
         }
         viewHolder.harga_kost.setText(harga);
         viewHolder.cardview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Toast.makeText(view.getContext(), "Nama Kost "+String.valueOf(model.nama_kost), Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), "Nama Kost "+String.valueOf(model.getNamaKost()), Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(view.getContext(),ScrollingActivity.class);
 
                 i.putExtra("id",model.getId());
-                i.putExtra("nama_kost",model.getNama_kost());
+                i.putExtra("nama_kost",model.getNamaKost());
                 i.putExtra("alamat_kost",model.getAlamat());
-                i.putExtra("fasilitas",model.getFasilias());
+                i.putExtra("fasilitas",model.getFasilitas());
                 i.putExtra("harga",model.getHarga());
                 i.putExtra("keterangan",model.getKeterangan());
-                i.putExtra("jumlah_kamar",model.getJumlah_kamar());
+                i.putExtra("jumlah_kamar",model.getJumlahKamar());
                 i.putExtra("tersedia",model.getTersedia());
                 i.putExtra("longtitude",model.getLongtitude());
                 i.putExtra("latitude",model.getLatitude());

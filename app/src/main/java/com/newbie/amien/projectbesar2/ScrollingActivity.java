@@ -29,7 +29,7 @@ import com.squareup.picasso.Picasso;
 
 public class ScrollingActivity extends AppCompatActivity {
     String longtitude, latitude, nama;
-    TextView nama_kost, harga, alamat, fasilitas, keterangan, jumlah_kamar,  image;
+    TextView nama_kost,tipe_kost, telepon, harga, alamat, fasilitas, keterangan, jumlah_kamar,  image;
     ImageView img;
     MapView mMapDetail;
 
@@ -48,12 +48,17 @@ public class ScrollingActivity extends AppCompatActivity {
         fasilitas= (TextView) findViewById(R.id.fasilitas);
         keterangan = (TextView) findViewById(R.id.deskripsi);
         jumlah_kamar = (TextView) findViewById(R.id.jumlah_kamar);
+        tipe_kost = (TextView) findViewById(R.id.tipe_kost);
+        telepon = (TextView) findViewById(R.id.telepon);
 
         nama_kost.setText(i.getStringExtra("nama_kost"));
-        alamat.setText(i.getStringExtra("alamat_kost"));
+        alamat.setText(i.getStringExtra("alamat_kost")+", "+i.getStringExtra("kota"));
         fasilitas.setText(i.getStringExtra("fasilitas"));
         keterangan.setText(i.getStringExtra("keterangan"));
         jumlah_kamar.setText(i.getStringExtra("jumlah_kamar"));
+        tipe_kost.setText("Kost "+i.getStringExtra("tipe_kost"));
+
+
 
         latitude=i.getStringExtra("latitude");
         longtitude=i.getStringExtra("longtitude");

@@ -14,6 +14,9 @@ public class Kost {
     @SerializedName("nama_kost")
     @Expose
     private String namaKost;
+    @SerializedName("tipe_kost")
+    @Expose
+    private String tipe_kost;
     @SerializedName("kota")
     @Expose
     private String kota;
@@ -62,6 +65,14 @@ public class Kost {
 
     public void setNamaKost(String namaKost) {
         this.namaKost = namaKost;
+    }
+
+    public String getTipe_kost() {
+        return tipe_kost;
+    }
+
+    public void setTipe_kost(String namaKost) {
+        this.tipe_kost = tipe_kost;
     }
 
     public String getKota() {

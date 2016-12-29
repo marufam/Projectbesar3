@@ -57,7 +57,6 @@ public class KostAdapter extends RecyclerView.Adapter<KostAdapter.ListItemViewHo
                 .load(model.getImage())
                 .into(viewHolder.imageView);
         String harga = null;
-        //Toast.makeText(context, ""+, Toast.LENGTH_SHORT).show();
         if(model.getHarga().length()>=7){
             harga = model.getHarga().substring(0,1);
             if(model.getHarga().substring(1,2).equals("0")==false){
@@ -73,7 +72,9 @@ public class KostAdapter extends RecyclerView.Adapter<KostAdapter.ListItemViewHo
         }else if(model.getHarga().length()>=4){
             harga = model.getHarga().substring(0,1)+"rb";
         }
+        viewHolder.kamar.setText(String.valueOf(model.getTersedia())+" kamar tersisa ");
         viewHolder.harga_kost.setText(harga);
+        viewHolder.tipe_kost.setText("Kost "+ String.valueOf(model.getTipe_kost()));
         viewHolder.cardview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,6 +84,8 @@ public class KostAdapter extends RecyclerView.Adapter<KostAdapter.ListItemViewHo
 
                 i.putExtra("id",model.getId());
                 i.putExtra("nama_kost",model.getNamaKost());
+                i.putExtra("tipe_kost",model.getTipe_kost());
+                i.putExtra("kota",model.getKota());
                 i.putExtra("alamat_kost",model.getAlamat());
                 i.putExtra("fasilitas",model.getFasilitas());
                 i.putExtra("harga",model.getHarga());
@@ -92,6 +95,7 @@ public class KostAdapter extends RecyclerView.Adapter<KostAdapter.ListItemViewHo
                 i.putExtra("longtitude",model.getLongtitude());
                 i.putExtra("latitude",model.getLatitude());
                 i.putExtra("image",model.getImage());
+                i.putExtra("id_pemilik",model.getIdPemilik());
                 view.getContext().startActivity(i);
             }
         });
@@ -104,7 +108,7 @@ public class KostAdapter extends RecyclerView.Adapter<KostAdapter.ListItemViewHo
     }
 
     public final static class ListItemViewHolder extends RecyclerView.ViewHolder {
-        TextView nama_kost, harga_kost;
+        TextView nama_kost, harga_kost, kamar, tipe_kost;
         ImageView imageView;
         CardView cardview;
 
@@ -114,6 +118,8 @@ public class KostAdapter extends RecyclerView.Adapter<KostAdapter.ListItemViewHo
             cardview = (CardView) itemView.findViewById(R.id.card_view);
             nama_kost = (TextView) itemView.findViewById(R.id.txt_namakost);
             harga_kost = (TextView) itemView.findViewById(R.id.harga_kost);
+            kamar = (TextView) itemView.findViewById(R.id.txt_room);
+            tipe_kost = (TextView) itemView.findViewById(R.id.tipe_kost);
             imageView = (ImageView) itemView.findViewById(R.id.gambar_kost);
 
         }

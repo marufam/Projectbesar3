@@ -6,6 +6,7 @@ import retrofit2.Call;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 /**
  * Created by amien on 28/12/16.
@@ -14,6 +15,9 @@ import retrofit2.http.POST;
 public interface ApiInterface {
     @GET("kost")
     Call<GetKost> getKost();
+
+    @GET("kost/cari/{valuenya}")
+    Call<GetKost> getKostcari(@Path("valuenya") String valuenya);
 
 //    @FormUrlEncoded
 //    @POST("kost")

@@ -45,6 +45,26 @@
                     android:textSize="10dp"
                     android:textColor="@color/white"/>
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#c2ffbd23"
+                android:id="@+id/tipe_l"
+                android:orientation="vertical"
+                android:layout_above="@+id/txt_namakost"
+                android:padding="10dp"
+                android:layout_alignParentRight="true"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kost Laki-laki"
+                    android:textSize="10dp"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:id="@+id/tipe_kost"/>
+
+            </LinearLayout>
             <TextView
                 android:id="@+id/txt_namakost"
                 android:layout_below="@id/gambar_kost"

@@ -27,6 +27,21 @@ public class Pemilik {
     @SerializedName("password")
     @Expose
     private String password;
+    public Pemilik(){}
+
+    public Pemilik(String id, String namaPemilik, String alamatPemilik, String telepon, String email, String password) {
+        this.id = id;
+        this.namaPemilik = namaPemilik;
+        this.alamatPemilik = alamatPemilik;
+        this.telepon = telepon;
+        this.email = email;
+        this.password = password;
+    }
+
+    public Pemilik(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
 
     public String getId() {
         return id;

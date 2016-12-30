@@ -5,6 +5,22 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.widget.Toast;
+
+import com.newbie.amien.projectbesar2.Home.adapter.KostAdapter;
+import com.newbie.amien.projectbesar2.data.rest.ApiClient;
+import com.newbie.amien.projectbesar2.data.rest.ApiInterface;
+import com.newbie.amien.projectbesar2.data.retrofit.GetKost;
+import com.newbie.amien.projectbesar2.data.retrofit.GetPemilik;
+import com.newbie.amien.projectbesar2.data.retrofit.Kost;
+import com.newbie.amien.projectbesar2.data.retrofit.Pemilik;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
@@ -18,6 +34,29 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_layout);
+
+
+        ApiInterface mApiInterface = ApiClient.login().create(ApiInterface.class);
+        Call<GetPemilik> kostCall = mApiInterface.postLogin(new Pemilik("artdeffend@gmail.com","a"));
+        kostCall.enqueue(new Callback<GetPemilik>() {
+            @Override
+            public void onResponse(Call<GetPemilik> call, Response<GetPemilik> response) {
+                Toast.makeText(SplashActivity.this, ""+response, Toast.LENGTH_SHORT).show();
+//                List<Kost> kostList = response.body().getKost();
+//                Log.d("Retrofit Get", "Jumlah data pembelian: " +
+//                        String.valueOf(kostList.size()));
+//                List<com.newbie.amien.projectbesar2.data.retrofit.Kost> r_kostlist = response.body().getKost();
+//
+            }
+
+            @Override
+            public void onFailure(Call<GetPemilik> call, Throwable t) {
+                Toast.makeText(SplashActivity.this, "Failde     "+t, Toast.LENGTH_SHORT).show();
+                Log.e("Retrofit Get", t.toString());
+            }
+
+
+        });
 
 
 

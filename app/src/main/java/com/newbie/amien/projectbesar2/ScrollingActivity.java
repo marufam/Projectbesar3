@@ -1,7 +1,10 @@
 package com.newbie.amien.projectbesar2;
 
 import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -94,6 +97,10 @@ public class ScrollingActivity extends AppCompatActivity {
         mMapDetail.onCreate(savedInstanceState);
         mMapDetail.onResume();
 
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+        nama_kost.setText(pref.getString("Email", null));
+
         try {
             MapsInitializer.initialize(getApplicationContext());
         } catch (Exception e) {
@@ -126,6 +133,8 @@ public class ScrollingActivity extends AppCompatActivity {
         finish();
         return super.onSupportNavigateUp();
     }
+
+
 
 //    @Override
 //    public boolean onOptionsItemSelected(MenuItem item) {

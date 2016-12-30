@@ -1,12 +1,16 @@
 package com.newbie.amien.projectbesar2;
 
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.view.menu.MenuView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -30,11 +34,11 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
 //        di gae DrawerLayout sama NavigationView /////
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         mNavigationView = (NavigationView) findViewById(R.id.shitstuff);
-
+        Menu menuNav = mNavigationView.getMenu();
+        menuNav.findItem(R.id.nav_item_history).setVisible(false);
 //        inflate yang pertama di fragment
 //        sing pertama tabfragment
         mFragmentManager = getSupportFragmentManager();
@@ -48,8 +52,10 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 mDrawerLayout.closeDrawers();
                 if(menuItem.getItemId()==R.id.nav_item_login){
-                    FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.containerView, new MapFragment()).commit();
+//                    FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+//                    fragmentTransaction.replace(R.id.containerView, new LoginActivity()).commit();
+                    Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+                    startActivity(i);
                 }
 
                 if (menuItem.getItemId()==R.id.nav_item_home){

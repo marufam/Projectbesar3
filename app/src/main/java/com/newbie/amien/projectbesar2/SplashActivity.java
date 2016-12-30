@@ -36,32 +36,6 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.splash_layout);
 
 
-        ApiInterface mApiInterface = ApiClient.login().create(ApiInterface.class);
-        Call<GetPemilik> kostCall = mApiInterface.postLogin(new Pemilik("artdeffend@gmail.com","b"));
-        kostCall.enqueue(new Callback<GetPemilik>() {
-            @Override
-            public void onResponse(Call<GetPemilik> call, Response<GetPemilik> response) {
-                Toast.makeText(SplashActivity.this, ""+response.body().getJumlah(), Toast.LENGTH_SHORT).show();
-//                List<Kost> kostList = response.body().getKost();
-//                Log.d("Retrofit Get", "Jumlah data pembelian: " +
-//                        String.valueOf(kostList.size()));
-//                List<com.newbie.amien.projectbesar2.data.retrofit.Kost> r_kostlist = response.body().getKost();
-//
-            }
-
-            @Override
-            public void onFailure(Call<GetPemilik> call, Throwable t) {
-                Toast.makeText(SplashActivity.this, "Failde     "+t, Toast.LENGTH_SHORT).show();
-                Log.e("Retrofit Get", t.toString());
-            }
-
-
-        });
-
-
-
-
-
         new Handler().postDelayed(new Runnable() {
 
             @Override

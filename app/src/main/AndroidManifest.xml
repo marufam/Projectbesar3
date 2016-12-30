@@ -3,16 +3,21 @@
     package="com.newbie.amien.projectbesar2">
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        >
+        android:theme="@style/AppTheme">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAJpupVCuAmG__V8dg5gWY9Md3Mc8f3Ylg" />
@@ -23,11 +28,13 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".ScrollingActivity"></activity>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".ScrollingActivity" />
+        <!--<activity android:name=".LoginActivity" />-->
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/title_activity_login"></activity>
     </application>
-
 
 </manifest>

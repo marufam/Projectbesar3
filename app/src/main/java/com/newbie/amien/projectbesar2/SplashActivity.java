@@ -37,11 +37,11 @@ public class SplashActivity extends AppCompatActivity {
 
 
         ApiInterface mApiInterface = ApiClient.login().create(ApiInterface.class);
-        Call<GetPemilik> kostCall = mApiInterface.postLogin(new Pemilik("artdeffend@gmail.com","a"));
+        Call<GetPemilik> kostCall = mApiInterface.postLogin(new Pemilik("artdeffend@gmail.com","b"));
         kostCall.enqueue(new Callback<GetPemilik>() {
             @Override
             public void onResponse(Call<GetPemilik> call, Response<GetPemilik> response) {
-                Toast.makeText(SplashActivity.this, ""+response, Toast.LENGTH_SHORT).show();
+                Toast.makeText(SplashActivity.this, ""+response.body().getJumlah(), Toast.LENGTH_SHORT).show();
 //                List<Kost> kostList = response.body().getKost();
 //                Log.d("Retrofit Get", "Jumlah data pembelian: " +
 //                        String.valueOf(kostList.size()));

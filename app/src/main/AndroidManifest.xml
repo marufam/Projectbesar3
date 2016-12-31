@@ -31,10 +31,13 @@
         </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".ScrollingActivity" />
-        <!--<activity android:name=".LoginActivity" />-->
+        <!-- <activity android:name=".LoginActivity" /> -->
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login"></activity>
+            android:label="@string/title_activity_login" />
+        <activity android:name=".Register"
+            android:parentActivityName=".LoginActivity"
+            android:theme="@style/inisiapa"></activity>
     </application>
 
 </manifest>

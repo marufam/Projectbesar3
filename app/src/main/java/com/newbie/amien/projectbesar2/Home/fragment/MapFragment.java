@@ -19,6 +19,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+
 import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -81,27 +82,7 @@ public class MapFragment extends Fragment implements LocationListener {
         mMapView = (MapView) rootView.findViewById(R.id.mapView);
         mMapView.onCreate(savedInstanceState);
 
-        mMapView.onResume(); // needed to get the map to display immediately
-//        googleMap.setMyLocationEnabled(true);
-//        googleMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
-//            @Override
-//            public void onMyLocationChange(Location location) {
-//                Location target = new Location("target");
-//                for(LatLng point : new LatLng[]{POINTA, POINTB, POINTC, POINTD}) {
-//                    target.setLatitude(point.latitude);
-//                    target.setLongitude(point.longitude);
-//                    if(location.distanceTo(target) < 100) {
-//                        // bingo!
-//                    }
-//                }
-//            }
-//        });
-        try {
-            MapsInitializer.initialize(getActivity().getApplicationContext());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        mMapView.onResume();
 
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         Criteria criteria = new Criteria();
@@ -121,7 +102,6 @@ public class MapFragment extends Fragment implements LocationListener {
                 Toast.makeText(getContext(), "No Location Provider Found Check Your Code", Toast.LENGTH_SHORT).show();
         }
 
-
         mMapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap mMap) {
@@ -137,16 +117,7 @@ public class MapFragment extends Fragment implements LocationListener {
                 // For dropping a marker at a point on the Map
                 if(myloca!=null) {
                     LatLng myLocation = new LatLng(myloca.latitude, myloca.longitude);
-//                    googleMap.addMarker(new MarkerOptions().position(forsa).title("Kost Malang Murah").snippet("700rb").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
                     cameraPosition = new CameraPosition.Builder().target(myLocation).zoom(14).build();
-
-//                    googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-//                        @Override
-//                        public boolean onMarkerClick(Marker marker) {
-//                            Toast.makeText(getContext(), "jhjhjhjhj", Toast.LENGTH_SHORT).show();
-//                            return false;
-//                        }
-//                    });
                     googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
                 }
 
@@ -202,11 +173,6 @@ public class MapFragment extends Fragment implements LocationListener {
 
                 });
 
-
-
-
-
-
                     googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                         @Override
                         public boolean onMarkerClick(final Marker marker) {
@@ -249,10 +215,114 @@ public class MapFragment extends Fragment implements LocationListener {
 
     }
 
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        final SearchView searchview = (SearchView) getView().findViewById(R.id.searchViewMap);
 
+        searchview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                mApiInterface = ApiClient.getClient().create(ApiInterface.class);
+                Call<GetKost> kostCall = mApiInterface.getKostcari(searchview.getQuery().toString());
+                kostCall.enqueue(new Callback<GetKost>() {
+                    @Override
+                    public void onResponse(Call<GetKost> call, Response<GetKost> response) {
+
+                        List<com.newbie.amien.projectbesar2.data.retrofit.Kost> r_kostlist = response.body().getKost();
+                        myKosts=r_kostlist;
+                        googleMap.clear();
+                        Toast.makeText(getContext(), ""+myKosts.size()+":"+myKosts.get(0).getNamaKost(), Toast.LENGTH_LONG).show();
+                        for (int i=0; i<myKosts.size(); i++){
+
+                            String harga = null;
+                            if(myKosts.get(i).getHarga().length()>=7){
+                                harga = myKosts.get(i).getHarga().substring(0,1);
+                                if(myKosts.get(i).getHarga().substring(1,2).equals("0")==false){
+                                    harga+=","+myKosts.get(i).getHarga().substring(1,2)+"jt";
+                                }else{
+                                    harga+="jt";
+                                }
+
+                            }else if(myKosts.get(i).getHarga().length()>=6){
+                                harga = myKosts.get(i).getHarga().substring(0,3)+"rb";
+                            }else if(myKosts.get(i).getHarga().length()>=5){
+                                harga = myKosts.get(i).getHarga().substring(0,2)+"rb";
+                            }else if(myKosts.get(i).getHarga().length()>=4){
+                                harga = myKosts.get(i).getHarga().substring(0,1)+"rb";
+                            }
+
+                            googleMap.addMarker(new MarkerOptions()
+                                    .position(new LatLng(Double.parseDouble(myKosts.get(i).getLatitude()), Double.parseDouble(myKosts.get(i).getLongtitude())))
+                                    .title(myKosts.get(i).getNamaKost()).snippet(harga).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)))
+                                    .setTag(myKosts.get(i));
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<GetKost> call, Throwable t) {
+                        Log.e("Error Retrofit Get", t.toString());
+                    }
+                });
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                mApiInterface = ApiClient.getClient().create(ApiInterface.class);
+                Call<GetKost> kostCall = mApiInterface.getKost();
+                kostCall.enqueue(new Callback<GetKost>() {
+                    @Override
+                    public void onResponse(Call<GetKost> call, Response<GetKost> response) {
+                        List<com.newbie.amien.projectbesar2.data.retrofit.Kost> kostList = response.body().getKost();
+                        Log.d("Retrofit Get", "Jumlah data pembelian: " +
+                                String.valueOf(kostList.size()));
+                        List<com.newbie.amien.projectbesar2.data.retrofit.Kost> r_kostlist = response.body().getKost();
+                        myKosts=r_kostlist;
+
+                        for (int i=0; i<myKosts.size(); i++){
+
+                            String harga = null;
+                            if(myKosts.get(i).getHarga().length()>=7){
+                                harga = myKosts.get(i).getHarga().substring(0,1);
+                                if(myKosts.get(i).getHarga().substring(1,2).equals("0")==false){
+                                    harga+=","+myKosts.get(i).getHarga().substring(1,2)+"jt";
+                                }else{
+                                    harga+="jt";
+                                }
+
+                            }else if(myKosts.get(i).getHarga().length()>=6){
+                                harga = myKosts.get(i).getHarga().substring(0,3)+"rb";
+                            }else if(myKosts.get(i).getHarga().length()>=5){
+                                harga = myKosts.get(i).getHarga().substring(0,2)+"rb";
+                            }else if(myKosts.get(i).getHarga().length()>=4){
+                                harga = myKosts.get(i).getHarga().substring(0,1)+"rb";
+                            }
+
+                            googleMap.addMarker(new MarkerOptions()
+                                    .position(new LatLng(Double.parseDouble(myKosts.get(i).getLatitude()), Double.parseDouble(myKosts.get(i).getLongtitude())))
+                                    .title(myKosts.get(i).getNamaKost()).snippet(harga).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)))
+                                    .setTag(myKosts.get(i));
+
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<GetKost> call, Throwable t) {
+                        Log.e("Error Retrofit Get", t.toString());
+                    }
+
+
+                });
+
+
+                return false;
+            }
+        });
     }
     @Override
     public void onResume() {

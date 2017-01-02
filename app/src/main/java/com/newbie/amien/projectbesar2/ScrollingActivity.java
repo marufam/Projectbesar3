@@ -99,7 +99,7 @@ public class ScrollingActivity extends AppCompatActivity {
 
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
-        nama_kost.setText(pref.getString("Email", null));
+        nama_kost.setText(pref.getString("Id", null));
 
         try {
             MapsInitializer.initialize(getApplicationContext());

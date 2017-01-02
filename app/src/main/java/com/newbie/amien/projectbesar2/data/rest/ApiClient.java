@@ -42,4 +42,15 @@ public class ApiClient {
         }
         return login;
     }
+
+    private static Retrofit insertpemilik = null;
+    public static Retrofit insertpemilik() {
+        if (insertpemilik==null) {
+            insertpemilik = new Retrofit.Builder()
+                    .baseUrl(BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+        }
+        return insertpemilik;
+    }
 }

@@ -3,8 +3,10 @@
 
     <item android:title="Artdeffend@gmail.com">
     <menu>
-    <item android:title="Profil"></item>
-        <item android:title="Logout"></item>
+    <item android:title="Profil"
+        android:id="@+id/nav_profil"></item>
+        <item android:title="Logout"
+            android:id="@+id/nav_logout"></item>
     </menu>
     </item>
     <item android:title="Home"

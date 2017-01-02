@@ -1,6 +1,7 @@
 package com.newbie.amien.projectbesar2;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -61,6 +62,15 @@ public class MainActivity extends AppCompatActivity {
                 if (menuItem.getItemId()==R.id.nav_item_home){
                     FragmentTransaction xframentTransaction = mFragmentManager.beginTransaction();
                     xframentTransaction.replace(R.id.containerView, new TabFragment()).commit();
+                }
+                if (menuItem.getItemId()==R.id.nav_profil){
+                    Intent i = new Intent(getApplicationContext(), Register.class);
+                    startActivity(i);
+                }
+                if (menuItem.getItemId()==R.id.nav_logout){
+                    SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.clear().commit();
                 }
                 return false;
             }

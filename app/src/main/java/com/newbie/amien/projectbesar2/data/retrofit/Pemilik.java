@@ -29,8 +29,18 @@ public class Pemilik {
     private String password;
     public Pemilik(){}
 
+
     public Pemilik(String id, String namaPemilik, String alamatPemilik, String telepon, String email, String password) {
         this.id = id;
+        this.namaPemilik = namaPemilik;
+        this.alamatPemilik = alamatPemilik;
+        this.telepon = telepon;
+        this.email = email;
+        this.password = password;
+    }
+
+    public Pemilik(String namaPemilik, String alamatPemilik, String telepon, String email, String password) {
+
         this.namaPemilik = namaPemilik;
         this.alamatPemilik = alamatPemilik;
         this.telepon = telepon;

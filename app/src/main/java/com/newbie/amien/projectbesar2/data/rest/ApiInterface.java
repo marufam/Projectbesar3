@@ -11,6 +11,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Body;
 
@@ -34,6 +35,14 @@ public interface ApiInterface {
     @Headers("Content-Type: application/json")
     @POST("pemilik/login")
     Call<GetPemilik> postLogin(@Body() Pemilik pemilik);
+
+    @Headers("Content-Type: application/json")
+    @POST("pemilik")
+    Call<GetPemilik> InsertPemilik(@Body() Pemilik pemilik);
+
+    @Headers("Content-Type: application/json")
+    @PUT("pemilik")
+    Call<GetPemilik> updatePemilik(@Body() Pemilik pemilik);
 
 //    @FormUrlEncoded
 //    @POST("kost")

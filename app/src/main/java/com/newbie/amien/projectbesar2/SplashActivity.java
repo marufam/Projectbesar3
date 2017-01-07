@@ -6,23 +6,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.widget.Toast;
-
-import com.newbie.amien.projectbesar2.Home.adapter.KostAdapter;
-import com.newbie.amien.projectbesar2.data.rest.ApiClient;
-import com.newbie.amien.projectbesar2.data.rest.ApiInterface;
-import com.newbie.amien.projectbesar2.data.retrofit.GetKost;
-import com.newbie.amien.projectbesar2.data.retrofit.GetPemilik;
-import com.newbie.amien.projectbesar2.data.retrofit.Kost;
-import com.newbie.amien.projectbesar2.data.retrofit.Pemilik;
 
 import java.io.File;
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 /**

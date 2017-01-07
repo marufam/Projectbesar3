@@ -16,7 +16,7 @@ public class Kost {
     private String namaKost;
     @SerializedName("tipe_kost")
     @Expose
-    private String tipe_kost;
+    private String tipeKost;
     @SerializedName("kota")
     @Expose
     private String kota;
@@ -47,9 +47,30 @@ public class Kost {
     @SerializedName("image")
     @Expose
     private String image;
-    @SerializedName("id_pemilik")
+    @SerializedName("nama_pemilik")
     @Expose
-    private String idPemilik;
+    private String namaPemilik;
+    @SerializedName("telepon")
+    @Expose
+    private String telepon;
+
+    public Kost(String id, String namaKost, String tipeKost, String kota, String alamat, String fasilitas, String harga, String keterangan, String jumlahKamar, String tersedia, String longtitude, String latitude, String image, String namaPemilik, String telepon) {
+        this.id = id;
+        this.namaKost = namaKost;
+        this.tipeKost = tipeKost;
+        this.kota = kota;
+        this.alamat = alamat;
+        this.fasilitas = fasilitas;
+        this.harga = harga;
+        this.keterangan = keterangan;
+        this.jumlahKamar = jumlahKamar;
+        this.tersedia = tersedia;
+        this.longtitude = longtitude;
+        this.latitude = latitude;
+        this.image = image;
+        this.namaPemilik = namaPemilik;
+        this.telepon = telepon;
+    }
 
     public String getId() {
         return id;
@@ -67,12 +88,12 @@ public class Kost {
         this.namaKost = namaKost;
     }
 
-    public String getTipe_kost() {
-        return tipe_kost;
+    public String getTipeKost() {
+        return tipeKost;
     }
 
-    public void setTipe_kost(String namaKost) {
-        this.tipe_kost = tipe_kost;
+    public void setTipeKost(String tipeKost) {
+        this.tipeKost = tipeKost;
     }
 
     public String getKota() {
@@ -155,12 +176,20 @@ public class Kost {
         this.image = image;
     }
 
-    public String getIdPemilik() {
-        return idPemilik;
+    public String getNamaPemilik() {
+        return namaPemilik;
     }
 
-    public void setIdPemilik(String idPemilik) {
-        this.idPemilik = idPemilik;
+    public void setNamaPemilik(String namaPemilik) {
+        this.namaPemilik = namaPemilik;
+    }
+
+    public String getTelepon() {
+        return telepon;
+    }
+
+    public void setTelepon(String telepon) {
+        this.telepon = telepon;
     }
 
 }

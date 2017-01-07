@@ -7,17 +7,17 @@ package com.newbie.amien.projectbesar2.data.retrofit;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Pemilik {
+public class User {
 
     @SerializedName("_id")
     @Expose
     private String id;
-    @SerializedName("nama_pemilik")
+    @SerializedName("nama_user")
     @Expose
-    private String namaPemilik;
-    @SerializedName("alamat_pemilik")
+    private String namaUser;
+    @SerializedName("alamat_user")
     @Expose
-    private String alamatPemilik;
+    private String alamatUser;
     @SerializedName("telepon")
     @Expose
     private String telepon;
@@ -27,28 +27,25 @@ public class Pemilik {
     @SerializedName("password")
     @Expose
     private String password;
-    public Pemilik(){}
 
-
-    public Pemilik(String id, String namaPemilik, String alamatPemilik, String telepon, String email, String password) {
+    public User(String id, String namaUser, String alamatUser, String telepon, String email, String password) {
         this.id = id;
-        this.namaPemilik = namaPemilik;
-        this.alamatPemilik = alamatPemilik;
+        this.namaUser = namaUser;
+        this.alamatUser = alamatUser;
         this.telepon = telepon;
         this.email = email;
         this.password = password;
     }
 
-    public Pemilik(String namaPemilik, String alamatPemilik, String telepon, String email, String password) {
-
-        this.namaPemilik = namaPemilik;
-        this.alamatPemilik = alamatPemilik;
+    public User(String namaUser, String alamatUser, String telepon, String email, String password) {
+        this.namaUser = namaUser;
+        this.alamatUser = alamatUser;
         this.telepon = telepon;
         this.email = email;
         this.password = password;
     }
 
-    public Pemilik(String email, String password) {
+    public User(String email, String password) {
         this.email = email;
         this.password = password;
     }
@@ -61,20 +58,20 @@ public class Pemilik {
         this.id = id;
     }
 
-    public String getNamaPemilik() {
-        return namaPemilik;
+    public String getNamaUser() {
+        return namaUser;
     }
 
-    public void setNamaPemilik(String namaPemilik) {
-        this.namaPemilik = namaPemilik;
+    public void setNamaUser(String namaUser) {
+        this.namaUser = namaUser;
     }
 
-    public String getAlamatPemilik() {
-        return alamatPemilik;
+    public String getAlamatUser() {
+        return alamatUser;
     }
 
-    public void setAlamatPemilik(String alamatPemilik) {
-        this.alamatPemilik = alamatPemilik;
+    public void setAlamatUser(String alamatUser) {
+        this.alamatUser = alamatUser;
     }
 
     public String getTelepon() {

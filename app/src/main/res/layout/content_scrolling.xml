@@ -212,10 +212,33 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/a_telepon"
+                    android:id="@+id/a_namapemilik"
                     android:orientation="horizontal"
                     android:weightSum="4"
                     android:layout_below="@+id/a_tipekost"
+                    android:layout_marginBottom="10dp">
+                    <TextView
+                        android:layout_weight="2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Nama Pemilik"
+                        android:layout_marginRight="5dp"
+                        />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="083847777651"
+                        android:id="@+id/nama_pemilik"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/a_telepon"
+                    android:orientation="horizontal"
+                    android:weightSum="4"
+                    android:layout_below="@+id/a_namapemilik"
                     android:layout_marginBottom="10dp">
                     <TextView
                         android:layout_weight="2"
@@ -304,7 +327,7 @@
                 <com.wefika.flowlayout.FlowLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal|center"
+                    android:gravity="center_horizontal"
                     android:textAlignment="center"
                     android:layout_below="@+id/garis_detail_fasilitas">
                     <LinearLayout
@@ -403,7 +426,8 @@
                         android:orientation="vertical"
                         android:layout_width="90dp"
                         android:layout_height="110dp"
-                        android:id="@+id/ic_televisi">
+                        android:id="@+id/ic_televisi"
+                        >
                             <Button
                             android:background="@mipmap/ic_television"
                             android:layout_width="50dp"
@@ -434,6 +458,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        >
+                    </LinearLayout>
+
 
                 </com.wefika.flowlayout.FlowLayout>
 

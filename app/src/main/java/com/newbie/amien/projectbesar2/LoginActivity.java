@@ -1,33 +1,16 @@
 package com.newbie.amien.projectbesar2;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.app.LoaderManager.LoaderCallbacks;
 
-import android.content.CursorLoader;
-import android.content.Loader;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.AsyncTask;
-
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,17 +19,12 @@ import android.widget.Toast;
 
 import com.newbie.amien.projectbesar2.data.rest.ApiClient;
 import com.newbie.amien.projectbesar2.data.rest.ApiInterface;
-import com.newbie.amien.projectbesar2.data.retrofit.GetPemilik;
-import com.newbie.amien.projectbesar2.data.retrofit.Pemilik;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.newbie.amien.projectbesar2.data.retrofit.GetUser;
+import com.newbie.amien.projectbesar2.data.retrofit.User;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static android.Manifest.permission.READ_CONTACTS;
 
 /**
  * A login screen that offers login via email/password.
@@ -87,23 +65,23 @@ public class LoginActivity extends AppCompatActivity {
 //                Toast.makeText(LoginActivity.this, ""+status, Toast.LENGTH_SHORT).show();
                 if(!status==true){
                     ApiInterface mApiInterface = ApiClient.login().create(ApiInterface.class);
-                    Call<GetPemilik> kostCall = mApiInterface.postLogin(new Pemilik(mEmailView.getText().toString(),mPasswordView.getText().toString()));
-                    kostCall.enqueue(new Callback<GetPemilik>() {
+                    Call<GetUser> kostCall = mApiInterface.postLogin(new User(mEmailView.getText().toString(),mPasswordView.getText().toString()));
+                    kostCall.enqueue(new Callback<GetUser>() {
                         @Override
-                        public void onResponse(Call<GetPemilik> call, Response<GetPemilik> response) {
+                        public void onResponse(Call<GetUser> call, Response<GetUser> response) {
 //                            Toast.makeText(getApplicationContext(), ""+response.body().getJumlah(), Toast.LENGTH_SHORT).show();
                             if(response.body().getJumlah()>0) {
 //                                Toast.makeText(LoginActivity.this, "" + response.body().getPemilik().get(0).getId(), Toast.LENGTH_SHORT).show();
                                 SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
                                 SharedPreferences.Editor editor = pref.edit();
-                                editor.putString("Id", response.body().getPemilik().get(0).getId());
-                                editor.putString("Email", response.body().getPemilik().get(0).getEmail());
-                                editor.putString("Nama", response.body().getPemilik().get(0).getNamaPemilik());
-                                editor.putString("Alamat", response.body().getPemilik().get(0).getAlamatPemilik());
-                                editor.putString("Telepon", response.body().getPemilik().get(0).getTelepon());
-                                editor.putString("Password", response.body().getPemilik().get(0).getPassword());
+                                editor.putString("Id", response.body().getUser().get(0).getId());
+                                editor.putString("Email", response.body().getUser().get(0).getEmail());
+                                editor.putString("Nama", response.body().getUser().get(0).getNamaUser());
+                                editor.putString("Alamat", response.body().getUser().get(0).getAlamatUser());
+                                editor.putString("Telepon", response.body().getUser().get(0).getTelepon());
+                                editor.putString("Password", response.body().getUser().get(0).getPassword());
                                 editor.commit();
-                                Toast.makeText(LoginActivity.this, "" + response.body().getPemilik().get(0).getId(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "" + response.body().getUser().get(0).getId(), Toast.LENGTH_SHORT).show();
                                 SharedPreferences pref2 = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
                                 Toast.makeText(LoginActivity.this, "" + pref2.getString("Id", null), Toast.LENGTH_SHORT).show();
                                 finish();
@@ -116,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onFailure(Call<GetPemilik> call, Throwable t) {
+                        public void onFailure(Call<GetUser> call, Throwable t) {
                             Toast.makeText(getApplicationContext(), "Failde     "+t, Toast.LENGTH_SHORT).show();
                             Log.e("Retrofit Get", t.toString());
                         }

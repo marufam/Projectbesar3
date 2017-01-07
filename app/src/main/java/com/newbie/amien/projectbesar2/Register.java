@@ -1,10 +1,7 @@
 package com.newbie.amien.projectbesar2;
 
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,10 +12,8 @@ import android.widget.Toast;
 
 import com.newbie.amien.projectbesar2.data.rest.ApiClient;
 import com.newbie.amien.projectbesar2.data.rest.ApiInterface;
-import com.newbie.amien.projectbesar2.data.retrofit.GetPemilik;
-import com.newbie.amien.projectbesar2.data.retrofit.Pemilik;
-
-import java.io.File;
+import com.newbie.amien.projectbesar2.data.retrofit.GetUser;
+import com.newbie.amien.projectbesar2.data.retrofit.User;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,14 +27,14 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        setTitle("Register");
+
         inisialisasi();
 
         btnsignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
-                if(pref.getString("Id", null).isEmpty()){
+                if(pref.getString("Id", null).equals("0")){
                     simpankepemilik();
                 }else{
                     Toast.makeText(Register.this, ""+pref.getString("Id", null), Toast.LENGTH_SHORT).show();
@@ -59,33 +54,38 @@ public class Register extends AppCompatActivity {
         Ipassword = (TextInputLayout) findViewById(R.id.iPassword);
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
 
-        if(pref.getString("Id",null)!=null){
-
+        if(pref.getString("Id",null).equals("0")){
+            btnsignup.setText("Simpan");
+            Ipassword.setVisibility(View.VISIBLE);
+            password.setVisibility(View.VISIBLE);
+                    setTitle("Register");
+        }else{
             Toast.makeText(this, ""+pref.getString("Id", null).toString(), Toast.LENGTH_SHORT).show();
             btnsignup.setText("Update");
             Ipassword.setVisibility(View.INVISIBLE);
             password.setVisibility(View.INVISIBLE);
             readPemilik(pref.getString("Id", null).toString());
+                    setTitle("Update");
         }
 
     }
 
     protected  void readPemilik(String Id){
         ApiInterface mApiInterface = ApiClient.login().create(ApiInterface.class);
-        Call<GetPemilik> kostCall = mApiInterface.getPemilikcari(Id.toString());
-        kostCall.enqueue(new Callback<GetPemilik>() {
+        Call<GetUser> kostCall = mApiInterface.getPemilikcari(Id.toString());
+        kostCall.enqueue(new Callback<GetUser>() {
             @Override
-            public void onResponse(Call<GetPemilik> call, Response<GetPemilik> response) {
+            public void onResponse(Call<GetUser> call, Response<GetUser> response) {
                 Toast.makeText(Register.this, ""+response.body().getJumlah(), Toast.LENGTH_SHORT).show();
-                namapemilik.setText(response.body().getPemilik().get(0).getNamaPemilik());
-                alamatpemilik.setText(response.body().getPemilik().get(0).getAlamatPemilik());
-                telepon.setText(response.body().getPemilik().get(0).getTelepon());
-                email.setText(response.body().getPemilik().get(0).getEmail());
+                namapemilik.setText(response.body().getUser().get(0).getNamaUser());
+                alamatpemilik.setText(response.body().getUser().get(0).getAlamatUser());
+                telepon.setText(response.body().getUser().get(0).getTelepon());
+                email.setText(response.body().getUser().get(0).getEmail());
 //                password.setText(response.body().getPemilik().get(0).getPassword());
             }
 
             @Override
-            public void onFailure(Call<GetPemilik> call, Throwable t) {
+            public void onFailure(Call<GetUser> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), "Failed read   "+t, Toast.LENGTH_SHORT).show();
                 Log.e("Retrofit Get", t.toString());
             }
@@ -102,22 +102,22 @@ public class Register extends AppCompatActivity {
             Toast.makeText(Register.this, "Lengkapi data dulu...", Toast.LENGTH_SHORT).show();
         }else{
             ApiInterface mApiInterface = ApiClient.login().create(ApiInterface.class);
-            Call<GetPemilik> kostCall = mApiInterface.InsertPemilik(new Pemilik(
+            Call<GetUser> kostCall = mApiInterface.InsertPemilik(new User(
                     namapemilik.getText().toString(),
                     alamatpemilik.getText().toString(),
                     telepon.getText().toString(),
                     email.getText().toString(),
                     password.getText().toString()));
-            kostCall.enqueue(new Callback<GetPemilik>() {
+            kostCall.enqueue(new Callback<GetUser>() {
                 @Override
-                public void onResponse(Call<GetPemilik> call, Response<GetPemilik> response) {
+                public void onResponse(Call<GetUser> call, Response<GetUser> response) {
                     Toast.makeText(getApplicationContext(), "Berhasil Terdaftar, Silahkan Login", Toast.LENGTH_LONG).show();
                     finish();
 
                 }
 
                 @Override
-                public void onFailure(Call<GetPemilik> call, Throwable t) {
+                public void onFailure(Call<GetUser> call, Throwable t) {
                     Toast.makeText(getApplicationContext(), "Failed Simpan    "+t, Toast.LENGTH_SHORT).show();
                     Log.e("Retrofit Get", t.toString());
                 }
@@ -135,23 +135,28 @@ public class Register extends AppCompatActivity {
 
             Toast.makeText(Register.this, "Lengkapi data dulu...", Toast.LENGTH_SHORT).show();
         }else{
+
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putString("Nama", namapemilik.getText().toString());
+            editor.putString("Email", email.getText().toString());
+            editor.commit();
             ApiInterface mApiInterface = ApiClient.login().create(ApiInterface.class);
-            Call<GetPemilik> kostCall = mApiInterface.updatePemilik(new Pemilik(
+            Call<GetUser> kostCall = mApiInterface.updatePemilik(new User(
                     Id.toString(),
                     namapemilik.getText().toString(),
                     alamatpemilik.getText().toString(),
                     telepon.getText().toString(),
                     email.getText().toString(),
                     pass.toString()));
-            kostCall.enqueue(new Callback<GetPemilik>() {
+            kostCall.enqueue(new Callback<GetUser>() {
                 @Override
-                public void onResponse(Call<GetPemilik> call, Response<GetPemilik> response) {
+                public void onResponse(Call<GetUser> call, Response<GetUser> response) {
                     Toast.makeText(getApplicationContext(), "Berhasil", Toast.LENGTH_LONG).show();
                     finish();
                 }
 
                 @Override
-                public void onFailure(Call<GetPemilik> call, Throwable t) {
+                public void onFailure(Call<GetUser> call, Throwable t) {
                     Toast.makeText(getApplicationContext(), "Berhasil", Toast.LENGTH_LONG).show();
                     finish();
 //                    Toast.makeText(getApplicationContext(), "Failed update    "+t.getMessage(), Toast.LENGTH_SHORT).show();

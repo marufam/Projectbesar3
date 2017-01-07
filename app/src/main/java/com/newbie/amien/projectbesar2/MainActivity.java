@@ -79,10 +79,18 @@ public class MainActivity extends AppCompatActivity {
                     Intent i = new Intent(getApplicationContext(), Register.class);
                     startActivity(i);
                 }
+                if (menuItem.getItemId()==R.id.nav_register){
+                    Intent i = new Intent(getApplicationContext(), Register.class);
+                    startActivity(i);
+                }
                 if (menuItem.getItemId()==R.id.nav_logout){
                     SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
                     SharedPreferences.Editor editor = pref.edit();
                     editor.putString("Id", "0");
+                    editor.putString("Nama", "");
+                    editor.putString("Email", "");
+                    editor.putString("Alamat", "");
+                    editor.putString("Telepon", "");
                     editor.commit();
                     ngaturmenu();
 
@@ -139,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
 //            namapemilik.setText(pref.getString("Nama", null));
 //            emailpemilik.setText("Email", null);
             menuNav.findItem(R.id.nav_item_login).setVisible(false);
-
+            menuNav.findItem(R.id.nav_register).setVisible(false);
             txtName.setText(pref.getString("Nama", null));
             txtEmail.setText(pref.getString("Email", null));
             menuNav.findItem(R.id.nav_item_history).setVisible(true);
@@ -151,6 +159,7 @@ public class MainActivity extends AppCompatActivity {
             txtName.setText("Welcome to the Kost Application");
             txtEmail.setText("");
             menuNav.findItem(R.id.nav_item_login).setVisible(true);
+            menuNav.findItem(R.id.nav_register).setVisible(true);
             menuNav.findItem(R.id.nav_item_history).setVisible(false);
             menuNav.findItem(R.id.nav_profil).setVisible(false);
             menuNav.findItem(R.id.nav_logout).setVisible(false);

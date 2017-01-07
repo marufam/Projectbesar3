@@ -23,6 +23,10 @@
         android:id="@+id/nav_logout"
         android:icon="@drawable/exit24"></item>
 
+    <item android:title="Register"
+        android:id="@+id/nav_register"
+        android:icon="@drawable/adduser24"></item>
+
     <!--<item android:title="Drafts"-->
         <!--android:id="@+id/nav_item_draft"-->
         <!--android:icon="@drawable/draft"/>-->

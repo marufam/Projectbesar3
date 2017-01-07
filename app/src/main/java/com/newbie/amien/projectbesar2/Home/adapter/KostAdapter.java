@@ -74,7 +74,7 @@ public class KostAdapter extends RecyclerView.Adapter<KostAdapter.ListItemViewHo
         }
         viewHolder.kamar.setText(String.valueOf(model.getTersedia())+" kamar tersisa ");
         viewHolder.harga_kost.setText(harga);
-        viewHolder.tipe_kost.setText("Kost "+ String.valueOf(model.getTipe_kost()));
+        viewHolder.tipe_kost.setText("Kost "+ String.valueOf(model.getTipeKost()));
         viewHolder.cardview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,7 +84,7 @@ public class KostAdapter extends RecyclerView.Adapter<KostAdapter.ListItemViewHo
 
                 i.putExtra("id",model.getId());
                 i.putExtra("nama_kost",model.getNamaKost());
-                i.putExtra("tipe_kost",model.getTipe_kost());
+                i.putExtra("tipe_kost",model.getTipeKost());
                 i.putExtra("kota",model.getKota());
                 i.putExtra("alamat_kost",model.getAlamat());
                 i.putExtra("fasilitas",model.getFasilitas());
@@ -95,7 +95,8 @@ public class KostAdapter extends RecyclerView.Adapter<KostAdapter.ListItemViewHo
                 i.putExtra("longtitude",model.getLongtitude());
                 i.putExtra("latitude",model.getLatitude());
                 i.putExtra("image",model.getImage());
-                i.putExtra("id_pemilik",model.getIdPemilik());
+                i.putExtra("nama_pemilik",model.getNamaPemilik());
+                i.putExtra("telepon",model.getTelepon());
                 view.getContext().startActivity(i);
             }
         });

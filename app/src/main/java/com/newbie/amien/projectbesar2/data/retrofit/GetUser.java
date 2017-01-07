@@ -1,18 +1,13 @@
 package com.newbie.amien.projectbesar2.data.retrofit;
+import java.util.List;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by amien on 28/12/16.
+ * Created by amien on 29/12/16.
  */
 
-import java.util.List;
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
-import java.util.List;
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
-public class GetKost {
+public class GetUser {
 
     @SerializedName("jumlah")
     @Expose
@@ -20,9 +15,9 @@ public class GetKost {
     @SerializedName("error")
     @Expose
     private Integer error;
-    @SerializedName("kost")
+    @SerializedName("user")
     @Expose
-    private List<Kost> kost = null;
+    private List<User> user = null;
 
     public Integer getJumlah() {
         return jumlah;
@@ -40,12 +35,12 @@ public class GetKost {
         this.error = error;
     }
 
-    public List<Kost> getKost() {
-        return kost;
+    public List<User> getUser() {
+        return user;
     }
 
-    public void setKost(List<Kost> kost) {
-        this.kost = kost;
+    public void setUser(List<User> user) {
+        this.user = user;
     }
 
 }

@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,15 +33,17 @@ import com.squareup.picasso.Picasso;
 
 public class ScrollingActivity extends AppCompatActivity {
     String longtitude, latitude, nama;
-    TextView nama_kost,tipe_kost, telepon, harga, alamat, fasilitas, keterangan, jumlah_kamar,  image;
+    TextView nama_kost,tipe_kost, telepon, harga, alamat, fasilitas, keterangan, jumlah_kamar,nama_pemilik,  image;
     ImageView img;
     MapView mMapDetail;
+    LinearLayout i_kasur, i_almari, i_kmandi, i_meja, i_kursi, i_televisi, i_ac;
 
     private GoogleMap googleMap;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scrolling);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -53,15 +56,16 @@ public class ScrollingActivity extends AppCompatActivity {
         jumlah_kamar = (TextView) findViewById(R.id.jumlah_kamar);
         tipe_kost = (TextView) findViewById(R.id.tipe_kost);
         telepon = (TextView) findViewById(R.id.telepon);
-
+        nama_pemilik = (TextView) findViewById(R.id.nama_pemilik);
         nama_kost.setText(i.getStringExtra("nama_kost"));
         alamat.setText(i.getStringExtra("alamat_kost")+", "+i.getStringExtra("kota"));
 //        fasilitas.setText(i.getStringExtra("fasilitas"));
         keterangan.setText(i.getStringExtra("keterangan"));
         jumlah_kamar.setText(i.getStringExtra("jumlah_kamar"));
         tipe_kost.setText("Kost "+i.getStringExtra("tipe_kost"));
-
-
+        telepon.setText(i.getStringExtra("telepon"));
+        nama_pemilik.setText(i.getStringExtra("nama_pemilik"));
+        aturfasilitas();
 
         latitude=i.getStringExtra("latitude");
         longtitude=i.getStringExtra("longtitude");
@@ -132,6 +136,54 @@ public class ScrollingActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         finish();
         return super.onSupportNavigateUp();
+    }
+
+    public void aturfasilitas(){
+        Intent i = getIntent();
+        i_kasur = (LinearLayout) findViewById(R.id.ic_kasur);
+        i_almari = (LinearLayout) findViewById(R.id.ic_almari);
+        i_kmandi = (LinearLayout) findViewById(R.id.ic_kamarmandi);
+        i_meja = (LinearLayout) findViewById(R.id.ic_meja);
+        i_kursi = (LinearLayout) findViewById(R.id.ic_kursi);
+        i_televisi = (LinearLayout) findViewById(R.id.ic_televisi);
+        i_ac = (LinearLayout) findViewById(R.id.ic_ac);
+        matikanfasilitas();
+        String fasilitas= i.getStringExtra("fasilitas");
+        if(!fasilitas.isEmpty()){
+            if(fasilitas.split(",")[0].equals("1")){
+                i_kasur.setVisibility(View.VISIBLE);
+            }
+
+            if(fasilitas.split(",")[1].equals("1")){
+                i_almari.setVisibility(View.VISIBLE);
+            }
+
+            if(fasilitas.split(",")[2].equals("1")){
+                i_kmandi.setVisibility(View.VISIBLE);
+            }
+
+            if(fasilitas.split(",")[3].equals("1")){
+                i_meja.setVisibility(View.VISIBLE);
+            }
+            if(fasilitas.split(",")[4].equals("1")){
+                i_kursi.setVisibility(View.VISIBLE);
+            }
+            if(fasilitas.split(",")[5].equals("1")){
+                i_televisi.setVisibility(View.VISIBLE);
+            }
+            if(fasilitas.split(",")[6].equals("1")){
+                i_ac.setVisibility(View.VISIBLE);
+            }
+        }
+    }
+    public void matikanfasilitas(){
+        i_kasur.setVisibility(View.GONE);
+        i_almari.setVisibility(View.GONE);
+        i_kmandi.setVisibility(View.GONE);
+        i_meja.setVisibility(View.GONE);
+        i_kursi.setVisibility(View.GONE);
+        i_televisi.setVisibility(View.GONE);
+        i_ac.setVisibility(View.GONE);
     }
 
 

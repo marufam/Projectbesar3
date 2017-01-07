@@ -313,7 +313,7 @@ public class MapFragment extends Fragment implements LocationListener {
                                         Intent i = new Intent(getContext(), ScrollingActivity.class);
                                         i.putExtra("id",k.getId());
                                         i.putExtra("nama_kost",k.getNamaKost());
-                                        i.putExtra("tipe_kost",k.getTipe_kost());
+                                        i.putExtra("tipe_kost",k.getTipeKost());
                                         i.putExtra("kota",k.getKota());
                                         i.putExtra("alamat_kost",k.getAlamat());
                                         i.putExtra("fasilitas",k.getFasilitas());
@@ -324,7 +324,8 @@ public class MapFragment extends Fragment implements LocationListener {
                                         i.putExtra("longtitude",k.getLongtitude());
                                         i.putExtra("latitude",k.getLatitude());
                                         i.putExtra("image",k.getImage());
-                                        i.putExtra("id_pemilik",k.getIdPemilik());
+                                        i.putExtra("namapemilik",k.getNamaPemilik());
+                                        i.putExtra("telepon",k.getTelepon());
                                         v.getContext().startActivity(i);
                                     }
                                 });

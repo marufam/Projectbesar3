@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -17,75 +17,75 @@
             android:orientation="vertical"
             android:background="@color/abu"
             android:padding="10dp">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Kost Papaya Asri Tipe 2"
-            android:textSize="18dp"
-            android:textColor="#FFF"
-            android:layout_marginBottom="5dp"
-            android:id="@+id/nama_kost"
-            android:textAlignment="center"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_gravity="center"
-            android:background="#ffffff" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:orientation="horizontal"
-            android:weightSum="4">
-            <LinearLayout
-                android:layout_weight="1"
-                android:layout_width="0dp"
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:layout_gravity="center_horizontal|center_vertical">
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/bayar"
-                    android:scaleType="fitXY"/>
-            </LinearLayout>
+                android:text="Kost Papaya Asri Tipe 2"
+                android:textSize="18dp"
+                android:textColor="#FFF"
+                android:layout_marginBottom="5dp"
+                android:id="@+id/nama_kost"
+                android:textAlignment="center"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_gravity="center"
+                android:background="#ffffff" />
             <LinearLayout
-                android:layout_weight="3"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/l_harga"
-                    android:textAlignment="center"
-                    android:textColor="#FFF"
-                    android:textSize="12dp"
-                    android:text="Harga"
-                    />
+                android:padding="10dp"
+                android:orientation="horizontal"
+                android:weightSum="4">
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:textAlignment="center"
+                    android:layout_gravity="center_horizontal|center_vertical">
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/bayar"
+                        android:scaleType="fitXY"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_weight="3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/harga_detail"
+                        android:id="@+id/l_harga"
                         android:textAlignment="center"
                         android:textColor="#FFF"
-                        android:textSize="20dp"
-                        android:text="0"
+                        android:textSize="12dp"
+                        android:text="Harga"
                         />
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text=" / bulan"
-                        android:textSize="20dp"
-                        android:textColor="#FFF"/>
-                </LinearLayout>
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/harga_detail"
+                            android:textAlignment="center"
+                            android:textColor="#FFF"
+                            android:textSize="20dp"
+                            android:text="0"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" / bulan"
+                            android:textSize="20dp"
+                            android:textColor="#FFF"/>
+                    </LinearLayout>
 
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
         </LinearLayout>
         <android.support.v7.widget.CardView
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -118,27 +118,27 @@
                     android:layout_below="@+id/detail"
                     android:id="@+id/garis_detail"/>
                 <!--<LinearLayout-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:id="@+id/a_jenis_kost"-->
-                    <!--android:orientation="horizontal"-->
-                    <!--android:weightSum="4"-->
-                    <!--android:layout_below="@+id/detail"-->
-                    <!--android:layout_marginBottom="10dp">-->
-                    <!--<TextView-->
-                        <!--android:layout_weight="2"-->
-                        <!--android:layout_width="0dp"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:text="Jenis Kost"-->
-                        <!--android:layout_marginRight="5dp"-->
-                        <!--/>-->
-                    <!--<TextView-->
-                        <!--android:layout_width="0dp"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_weight="2"-->
-                        <!--android:text="Kost Perempuan"-->
-                        <!--android:id="@+id/jenis_kost"-->
-                        <!--/>-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:id="@+id/a_jenis_kost"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:weightSum="4"-->
+                <!--android:layout_below="@+id/detail"-->
+                <!--android:layout_marginBottom="10dp">-->
+                <!--<TextView-->
+                <!--android:layout_weight="2"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Jenis Kost"-->
+                <!--android:layout_marginRight="5dp"-->
+                <!--/>-->
+                <!--<TextView-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="2"-->
+                <!--android:text="Kost Perempuan"-->
+                <!--android:id="@+id/jenis_kost"-->
+                <!--/>-->
                 <!--</LinearLayout>-->
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -240,30 +240,31 @@
                     android:weightSum="4"
                     android:layout_below="@+id/a_telepon"
                     android:layout_marginBottom="10dp">
-                    <TextView
-                        android:layout_weight="2"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="Fasilitas"
-                        android:layout_marginRight="5dp"
-                        />
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:text="12dp"
-                        android:id="@+id/fasilitas"
-                        />
+                    <!--<TextView-->
+                    <!--android:layout_weight="2"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Fasilitas"-->
+                    <!--android:layout_marginRight="5dp"-->
+                    <!--/>-->
+
+                    <!--<TextView-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="2"-->
+                    <!--android:text="12dp"-->
+                    <!--android:id="@+id/fasilitas"-->
+                    <!--/>-->
                 </LinearLayout>
 
 
                 <!--<TextView-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="12dp1212"-->
-                    <!--android:id="@+id/tersedia"-->
-                    <!--android:layout_below="@+id/a_jumlah_kamar"-->
-                    <!--/>-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="12dp1212"-->
+                <!--android:id="@+id/tersedia"-->
+                <!--android:layout_below="@+id/a_jumlah_kamar"-->
+                <!--/>-->
 
             </RelativeLayout>
         </android.support.v7.widget.CardView>
@@ -277,75 +278,184 @@
             card_view:cardCornerRadius="4dp"
             android:layout_margin="10dp"
             >
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="10dp"
-            android:id="@+id/r_fasilitas">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Fasilitas"
-            android:textSize="15dp"
-            android:id="@+id/detail_fasilitas"
-            android:textAlignment="center"
-            />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_gravity="center"
-            android:background="#CCC"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_below="@+id/detail_fasilitas"
-            android:id="@+id/garis_detail_fasilitas"/>
-        <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:id="@+id/a_jenis_kost"-->
-        <!--android:orientation="horizontal"-->
-        <!--android:weightSum="4"-->
-        <!--android:layout_below="@+id/detail"-->
-        <!--android:layout_marginBottom="10dp">-->
-        <!--<TextView-->
-        <!--android:layout_weight="2"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Jenis Kost"-->
-        <!--android:layout_marginRight="5dp"-->
-        <!--/>-->
-        <!--<TextView-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_weight="2"-->
-        <!--android:text="Kost Perempuan"-->
-        <!--android:id="@+id/jenis_kost"-->
-        <!--/>-->
-        <!--</LinearLayout>-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/al_fasilitas"
-            android:orientation="horizontal"
-            android:weightSum="4"
-            android:layout_below="@+id/garis_detail_fasilitas"
-            android:layout_marginBottom="10dp">
-            <TextView
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="icon"
-                android:layout_marginRight="5dp"
-                />
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:text="12"
-                android:id="@+id/d_fasilitas"
-                />
-        </LinearLayout>
-        </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:id="@+id/r_fasilitas">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Fasilitas"
+                    android:textSize="15dp"
+                    android:id="@+id/detail_fasilitas"
+                    android:textAlignment="center"
+                    />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_gravity="center"
+                    android:background="#CCC"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_below="@+id/detail_fasilitas"
+                    android:id="@+id/garis_detail_fasilitas"/>
+
+                <com.wefika.flowlayout.FlowLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal|center"
+                    android:textAlignment="center"
+                    android:layout_below="@+id/garis_detail_fasilitas">
+                    <LinearLayout
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:layout_width="90dp"
+                        android:layout_height="110dp"
+                        android:id="@+id/ic_kasur">
+                        <Button
+                            android:background="@mipmap/ic_bed"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp" />
+                        <TextView
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="Kasur"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:layout_width="90dp"
+                        android:layout_height="110dp"
+                        android:id="@+id/ic_almari">
+                        <Button
+                            android:background="@mipmap/ic_almari"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp" />
+                        <TextView
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="Almari Pakaian"
+                            android:layout_marginBottom="20dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:layout_width="90dp"
+                        android:layout_height="110dp"
+                        android:id="@+id/ic_kamarmandi">
+
+                        <Button
+                            android:background="@mipmap/ic_bathtub"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"/>
+                        <TextView
+
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="Kamar Mandi Dalam"
+                            android:layout_marginBottom="5dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:layout_width="90dp"
+                        android:layout_height="110dp"
+                        android:id="@+id/ic_meja">
+                            <Button
+                            android:background="@mipmap/ic_table"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp" />
+                            <TextView
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="Meja"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:layout_width="90dp"
+                        android:layout_height="110dp"
+                        android:id="@+id/ic_kursi">
+                        <Button
+                            android:background="@mipmap/ic_chair"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp" />
+                        <TextView
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="Kursi"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:layout_width="90dp"
+                        android:layout_height="110dp"
+                        android:id="@+id/ic_televisi">
+                            <Button
+                            android:background="@mipmap/ic_television"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp" />
+                            <TextView
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="Televisi"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:layout_width="90dp"
+                        android:layout_height="110dp"
+                        android:id="@+id/ic_ac">
+                        <Button
+                        android:background="@mipmap/ic_airconditioner"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp" />
+                        <TextView
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:text="AC"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                    </LinearLayout>
+
+                </com.wefika.flowlayout.FlowLayout>
+
+
+                    <!--<LinearLayout-->
+                        <!--android:gravity="center"-->
+                        <!--android:orientation="vertical"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:layout_width="1dp"-->
+                        <!--android:layout_height="wrap_content">-->
+
+
+
+                        <!--&lt;!&ndash;<Button&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:background="@mipmap/ic_bed"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_width="50dp"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_height="50dp" />&ndash;&gt;-->
+
+                    <!--</LinearLayout>-->
+
+                <!--</LinearLayout>-->
+            </RelativeLayout>
         </android.support.v7.widget.CardView>
 
         <LinearLayout
@@ -432,6 +542,6 @@
                     android:id="@+id/alamat"
                     />
             </LinearLayout>
-            </android.support.v7.widget.CardView>
+        </android.support.v7.widget.CardView>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

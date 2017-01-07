@@ -1,6 +1,7 @@
 package com.newbie.amien.projectbesar2;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -16,6 +17,7 @@ import com.newbie.amien.projectbesar2.data.retrofit.GetPemilik;
 import com.newbie.amien.projectbesar2.data.retrofit.Kost;
 import com.newbie.amien.projectbesar2.data.retrofit.Pemilik;
 
+import java.io.File;
 import java.util.List;
 
 import retrofit2.Call;
@@ -35,7 +37,15 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_layout);
 
+        File f = new File(
+                "/data/data/com.newbie.amien.projectbesar2/shared_prefs/MyPref.xml");
+        if (!f.exists()) {
+            SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putString("Id", "0");
+            editor.commit();
 
+        }
         new Handler().postDelayed(new Runnable() {
 
             @Override

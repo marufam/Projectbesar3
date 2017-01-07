@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/view_container"
+    android:layout_width="match_parent"
+    android:layout_height="160dp"
+    android:gravity="bottom"
+    android:orientation="vertical"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+    <ImageView
+        android:id="@+id/img_header_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:background="@color/abu"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:orientation="vertical"
+        android:padding="@dimen/activity_horizontal_margin">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/img_profile"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/kostputih3"/>
+        </RelativeLayout>
+        <TextView
+            android:id="@+id/nav_namapemilik"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="16dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:text="hahahahahah"
+            android:gravity="left"/>
+
+        <TextView
+            android:id="@+id/nav_emailpemilik"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="jajajsjasja"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

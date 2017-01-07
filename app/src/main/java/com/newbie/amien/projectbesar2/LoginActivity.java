@@ -91,21 +91,25 @@ public class LoginActivity extends AppCompatActivity {
                     kostCall.enqueue(new Callback<GetPemilik>() {
                         @Override
                         public void onResponse(Call<GetPemilik> call, Response<GetPemilik> response) {
-                            Toast.makeText(getApplicationContext(), ""+response.body().getJumlah(), Toast.LENGTH_SHORT).show();
-                            Toast.makeText(LoginActivity.this, ""+response.body().getPemilik().get(0).getId(), Toast.LENGTH_SHORT).show();
-                            SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
-                            SharedPreferences.Editor editor = pref.edit();
-                            editor.putString("Id", response.body().getPemilik().get(0).getId());
-                            editor.putString("Email", response.body().getPemilik().get(0).getEmail());
-                            editor.putString("Nama", response.body().getPemilik().get(0).getNamaPemilik());
-                            editor.putString("Alamat", response.body().getPemilik().get(0).getAlamatPemilik());
-                            editor.putString("Telepon", response.body().getPemilik().get(0).getTelepon());
-                            editor.putString("Password", response.body().getPemilik().get(0).getPassword());
-                            editor.commit();
-                            Toast.makeText(LoginActivity.this, ""+response.body().getPemilik().get(0).getId(), Toast.LENGTH_SHORT).show();
-                            SharedPreferences pref2 = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
-                            Toast.makeText(LoginActivity.this, ""+pref2.getString("Id", null), Toast.LENGTH_SHORT).show();
-                            finish();
+//                            Toast.makeText(getApplicationContext(), ""+response.body().getJumlah(), Toast.LENGTH_SHORT).show();
+                            if(response.body().getJumlah()>0) {
+//                                Toast.makeText(LoginActivity.this, "" + response.body().getPemilik().get(0).getId(), Toast.LENGTH_SHORT).show();
+                                SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+                                SharedPreferences.Editor editor = pref.edit();
+                                editor.putString("Id", response.body().getPemilik().get(0).getId());
+                                editor.putString("Email", response.body().getPemilik().get(0).getEmail());
+                                editor.putString("Nama", response.body().getPemilik().get(0).getNamaPemilik());
+                                editor.putString("Alamat", response.body().getPemilik().get(0).getAlamatPemilik());
+                                editor.putString("Telepon", response.body().getPemilik().get(0).getTelepon());
+                                editor.putString("Password", response.body().getPemilik().get(0).getPassword());
+                                editor.commit();
+                                Toast.makeText(LoginActivity.this, "" + response.body().getPemilik().get(0).getId(), Toast.LENGTH_SHORT).show();
+                                SharedPreferences pref2 = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+                                Toast.makeText(LoginActivity.this, "" + pref2.getString("Id", null), Toast.LENGTH_SHORT).show();
+                                finish();
+                            }else{
+                                Toast.makeText(LoginActivity.this, "Login Gagal", Toast.LENGTH_SHORT).show();
+                            }
 
 
 

@@ -44,8 +44,23 @@
             android:id="@+id/shitstuff"
             app:itemTextColor="@color/black"
             app:menu="@menu/drawermenu"
+            app:headerLayout="@layout/nav_header_main"
+            >
 
-            />
+                <!--<RelativeLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="150dp"-->
+                    <!--android:background="@color/abu"-->
+                    <!--android:layout_marginTop="-50dp">-->
+                    <!--<ImageView-->
+                        <!--android:layout_width="80dp"-->
+                        <!--android:layout_height="80dp"-->
+                        <!--android:layout_centerInParent="true"-->
+                        <!--android:src="@drawable/logo"/>-->
+                <!--</RelativeLayout>-->
+
+
+        </android.support.design.widget.NavigationView>
 
 
 

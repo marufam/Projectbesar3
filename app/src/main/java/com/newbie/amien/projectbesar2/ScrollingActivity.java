@@ -48,7 +48,7 @@ public class ScrollingActivity extends AppCompatActivity {
         Intent i = getIntent();
         nama_kost = (TextView) findViewById(R.id.nama_kost);
         alamat = (TextView) findViewById(R.id.alamat);
-        fasilitas= (TextView) findViewById(R.id.fasilitas);
+//        fasilitas= (TextView) findViewById(R.id.fasilitas);
         keterangan = (TextView) findViewById(R.id.deskripsi);
         jumlah_kamar = (TextView) findViewById(R.id.jumlah_kamar);
         tipe_kost = (TextView) findViewById(R.id.tipe_kost);
@@ -56,7 +56,7 @@ public class ScrollingActivity extends AppCompatActivity {
 
         nama_kost.setText(i.getStringExtra("nama_kost"));
         alamat.setText(i.getStringExtra("alamat_kost")+", "+i.getStringExtra("kota"));
-        fasilitas.setText(i.getStringExtra("fasilitas"));
+//        fasilitas.setText(i.getStringExtra("fasilitas"));
         keterangan.setText(i.getStringExtra("keterangan"));
         jumlah_kamar.setText(i.getStringExtra("jumlah_kamar"));
         tipe_kost.setText("Kost "+i.getStringExtra("tipe_kost"));
@@ -98,8 +98,8 @@ public class ScrollingActivity extends AppCompatActivity {
         mMapDetail.onResume();
 
 
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
-        nama_kost.setText(pref.getString("Id", null));
+//        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+//        nama_kost.setText(pref.getString("Email", null));
 
         try {
             MapsInitializer.initialize(getApplicationContext());

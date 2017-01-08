@@ -12,6 +12,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,7 +30,19 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.newbie.amien.projectbesar2.data.rest.ApiClient;
+import com.newbie.amien.projectbesar2.data.rest.ApiInterface;
+import com.newbie.amien.projectbesar2.data.retrofit.GetHistory;
+import com.newbie.amien.projectbesar2.data.retrofit.GetKost;
+import com.newbie.amien.projectbesar2.data.retrofit.History;
+import com.newbie.amien.projectbesar2.data.retrofit.Kost;
 import com.squareup.picasso.Picasso;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ScrollingActivity extends AppCompatActivity {
     String longtitude, latitude, nama;
@@ -37,7 +50,7 @@ public class ScrollingActivity extends AppCompatActivity {
     ImageView img;
     MapView mMapDetail;
     LinearLayout i_kasur, i_almari, i_kmandi, i_meja, i_kursi, i_televisi, i_ac;
-
+    ApiInterface mApiInterface;
     private GoogleMap googleMap;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,9 +115,6 @@ public class ScrollingActivity extends AppCompatActivity {
         mMapDetail.onResume();
 
 
-//        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
-//        nama_kost.setText(pref.getString("Email", null));
-
         try {
             MapsInitializer.initialize(getApplicationContext());
         } catch (Exception e) {
@@ -130,6 +140,29 @@ public class ScrollingActivity extends AppCompatActivity {
                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
             }
         });
+
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+        if(!pref.getString("Id", null).equals("0")) {
+
+            mApiInterface = ApiClient.getClient().create(ApiInterface.class);
+            Call<GetHistory> kostCall = mApiInterface.postHistory(new History(i.getStringExtra("id").toString(),pref.getString("Id", null).toString()));
+//                    Toast.makeText(HistoryActivity.this, "haahha "+r_history.get(i).getIdKost(), Toast.LENGTH_SHORT).show();
+            kostCall.enqueue(new Callback<GetHistory>() {
+                @Override
+                public void onResponse(Call<GetHistory> call, Response<GetHistory> response) {
+                    List<History> r_kostlist = response.body().getHistory();
+//                            Toast.makeText(HistoryActivity.this, "Jumlah "+r_kostlist.size(), Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onFailure(Call<GetHistory> call, Throwable t) {
+                    Log.e("Retrofit Get", t.toString());
+                }
+
+
+            });
+        }
     }
 
     @Override

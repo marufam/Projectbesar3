@@ -19,6 +19,11 @@ public class History {
     @Expose
     private String idUser;
 
+    public History(String idKost, String idUser) {
+        this.idKost = idKost;
+        this.idUser = idUser;
+    }
+
     public String getId() {
         return id;
     }

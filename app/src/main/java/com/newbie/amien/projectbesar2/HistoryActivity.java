@@ -34,7 +34,7 @@ public class HistoryActivity extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     ApiInterface mApiInterface;
 //    private List<History> myhistory=new ArrayList<>();
-//    private List<Kost> mykost= new ArrayList<>();
+    private List<Kost> mykost= new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +75,9 @@ public class HistoryActivity extends AppCompatActivity {
                         public void onResponse(Call<GetKost> call, Response<GetKost> response) {
                             List<com.newbie.amien.projectbesar2.data.retrofit.Kost> r_kostlist = response.body().getKost();
 //                            Toast.makeText(HistoryActivity.this, "Jumlah "+r_kostlist.size(), Toast.LENGTH_SHORT).show();
-                            mAdapter = new HistoryAdapter(r_kostlist);
+
+                            mykost.add(r_kostlist.get(0));
+                            mAdapter = new HistoryAdapter(mykost);
                             mRecycleview.setAdapter(mAdapter);
                         }
 

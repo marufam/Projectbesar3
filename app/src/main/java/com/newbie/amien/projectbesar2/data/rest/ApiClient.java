@@ -53,4 +53,15 @@ public class ApiClient {
         }
         return insertpemilik;
     }
+
+    private static Retrofit crudHistory = null;
+    public static Retrofit crudHistory() {
+        if (crudHistory==null) {
+            crudHistory = new Retrofit.Builder()
+                    .baseUrl(BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+        }
+        return crudHistory;
+    }
 }

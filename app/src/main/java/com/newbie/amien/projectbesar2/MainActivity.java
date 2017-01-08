@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.newbie.amien.projectbesar2.Home.fragment.MapFragment;
 import com.newbie.amien.projectbesar2.Home.fragment.TabFragment;
+import com.newbie.amien.projectbesar2.data.retrofit.History;
 
 public class MainActivity extends AppCompatActivity {
     DrawerLayout mDrawerLayout;
@@ -74,6 +75,11 @@ public class MainActivity extends AppCompatActivity {
                 if (menuItem.getItemId()==R.id.nav_item_home){
                     FragmentTransaction xframentTransaction = mFragmentManager.beginTransaction();
                     xframentTransaction.replace(R.id.containerView, new TabFragment()).commit();
+                }
+
+                if (menuItem.getItemId()==R.id.nav_item_history){
+                    Intent i = new Intent(getApplicationContext(), HistoryActivity.class);
+                    startActivity(i);
                 }
                 if (menuItem.getItemId()==R.id.nav_profil){
                     Intent i = new Intent(getApplicationContext(), Register.class);

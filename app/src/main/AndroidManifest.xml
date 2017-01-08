@@ -35,9 +35,15 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" />
-        <activity android:name=".Register"
+        <activity
+            android:name=".Register"
             android:parentActivityName=".LoginActivity"
-            android:theme="@style/inisiapa"></activity>
+            android:theme="@style/inisiapa" />
+        <activity
+            android:name=".HistoryActivity"
+            android:label="@string/title_activity_history"
+            android:parentActivityName=".LoginActivity"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

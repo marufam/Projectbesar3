@@ -1,7 +1,9 @@
 package com.newbie.amien.projectbesar2.data.rest;
 
+import com.newbie.amien.projectbesar2.data.retrofit.GetHistory;
 import com.newbie.amien.projectbesar2.data.retrofit.GetKost;
 import com.newbie.amien.projectbesar2.data.retrofit.GetUser;
+import com.newbie.amien.projectbesar2.data.retrofit.History;
 import com.newbie.amien.projectbesar2.data.retrofit.User;
 
 import retrofit2.Call;
@@ -23,6 +25,9 @@ public interface ApiInterface {
     @GET("kost/cari/{valuenya}")
     Call<GetKost> getKostcari(@Path("valuenya") String valuenya);
 
+    @GET("kost/{valuenya}")
+    Call<GetKost> getKostId(@Path("valuenya") String valuenya);
+
     @GET("user")
     Call<GetUser> getPemilik();
 
@@ -40,6 +45,17 @@ public interface ApiInterface {
     @Headers("Content-Type: application/json")
     @PUT("user")
     Call<GetUser> updatePemilik(@Body() User user);
+
+    @GET("history")
+    Call<GetHistory> getHistory();
+
+    @GET("history/{valuenya}")
+    Call<GetHistory> getHistoryId(@Path("valuenya") String valuenya);
+
+    @Headers("Content-Type: application/json")
+    @POST("history")
+    Call<GetHistory> postHistory(@Body()History history);
+
 
 //    @FormUrlEncoded
 //    @POST("kost")

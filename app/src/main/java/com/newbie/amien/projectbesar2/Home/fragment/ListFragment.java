@@ -59,9 +59,7 @@ public class ListFragment extends Fragment {
         kostCall.enqueue(new Callback<GetKost>() {
             @Override
             public void onResponse(Call<GetKost> call, Response<GetKost> response) {
-                List<com.newbie.amien.projectbesar2.data.retrofit.Kost> kostList = response.body().getKost();
-                Log.d("Retrofit Get", "Jumlah data pembelian: " +
-                        String.valueOf(kostList.size()));
+//                List<com.newbie.amien.projectbesar2.data.retrofit.Kost> kostList = response.body().getKost();
                 List<com.newbie.amien.projectbesar2.data.retrofit.Kost> r_kostlist = response.body().getKost();
                 myKosts=r_kostlist;
                 mAdapter = new KostAdapter(r_kostlist);

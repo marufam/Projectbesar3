@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:id="@+id/h_card">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp">
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/kostputih3"
+            android:id="@+id/gambari"
+            android:background="#FA0"
+            android:padding="5dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="asasa"
+            android:textSize="20dp"
+            android:layout_toRightOf="@id/gambari"
+            android:gravity="center_vertical"
+            android:id="@+id/h_nama_kost"
+            />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Jalan apapap"
+                android:id="@+id/h_alamat"
+                android:layout_below="@+id/h_nama_kost"
+                android:layout_toRightOf="@id/gambari"
+                android:layout_marginLeft="10dp"
+                android:textSize="10dp"/>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

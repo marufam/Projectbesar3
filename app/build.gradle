@@ -44,4 +44,7 @@ dependencies {
 //ben otomatis kebawah fasilitas
     compile "com.wefika:flowlayout:0.3.0"
 
+    //nyari distance
+    compile 'com.google.maps.android:android-maps-utils:0.3+'
+
 }

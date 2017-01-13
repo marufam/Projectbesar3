@@ -157,7 +157,7 @@ public class Register extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<GetUser> call, Throwable t) {
-                    Toast.makeText(getApplicationContext(), "Berhasil", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Gagal", Toast.LENGTH_LONG).show();
                     finish();
 //                    Toast.makeText(getApplicationContext(), "Failed update    "+t.getMessage(), Toast.LENGTH_SHORT).show();
 //

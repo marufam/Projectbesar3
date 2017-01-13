@@ -48,10 +48,10 @@ public class MainActivity extends AppCompatActivity {
 //        inflate yang pertama di fragment
 //        sing pertama tabfragment
         mFragmentManager = getSupportFragmentManager();
-        mFragmentTransaction = mFragmentManager.beginTransaction();
+        mFragmentTransaction = mFragmentManager.beginTransaction(); ///fragment transaction ini digunakan jika ingin mengganti fragment
         mFragmentTransaction.replace(R.id.containerView, new TabFragment()).commit();
         mNavigationView.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+
             @Override
             public void onClick(View v) {
                 ngaturmenu();
@@ -66,8 +66,6 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 mDrawerLayout.closeDrawers();
                 if(menuItem.getItemId()==R.id.nav_item_login){
-//                    FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-//                    fragmentTransaction.replace(R.id.containerView, new LoginActivity()).commit();
                     Intent i = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(i);
                 }
@@ -116,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -125,24 +123,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.activity_main_actions, menu);
-        ngaturmenu();
-        return super.onCreateOptionsMenu(menu);
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuInflater inflater = getMenuInflater();
+//        inflater.inflate(R.menu.activity_main_actions, menu);
+//        ngaturmenu();
+//        return super.onCreateOptionsMenu(menu);
+//    }
+
+//    @Override
+//    public boolean onMenuOpened(int featureId, Menu menu) {
+//        ngaturmenu();
+//        return super.onMenuOpened(featureId, menu);
+//    }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
-    @Override
-    public boolean onMenuOpened(int featureId, Menu menu) {
-        ngaturmenu();
-        return super.onMenuOpened(featureId, menu);
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     public void ngaturmenu(){
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
         Menu menuNav = mNavigationView.getMenu();

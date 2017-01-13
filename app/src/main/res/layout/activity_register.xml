@@ -29,7 +29,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:imeOptions="actionUnspecified"
-                    android:hint="Nama Pemilik"
+                    android:hint="Nama "
                     android:maxLines="1"
                     android:singleLine="true" />
 
@@ -44,7 +44,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:imeOptions="actionUnspecified"
-                    android:hint="Alamat Pemilik"
+                    android:hint="Alamat "
                     android:maxLines="1"
                     android:singleLine="true" />
 
@@ -59,7 +59,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:imeOptions="actionUnspecified"
-                    android:hint="Telepon Pemilik"
+                    android:hint="Telepon "
                     android:maxLines="1"
                     android:singleLine="true" />
 
@@ -74,7 +74,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:imeOptions="actionUnspecified"
-                    android:hint="Email Pemilik"
+                    android:hint="Email "
                     android:maxLines="1"
                     android:singleLine="true" />
 
@@ -89,7 +89,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:imeOptions="actionUnspecified"
-                    android:hint="Password Pemilik"
+                    android:hint="Password "
                     android:inputType="textPassword"
                     android:maxLines="1"
                     android:singleLine="true" />

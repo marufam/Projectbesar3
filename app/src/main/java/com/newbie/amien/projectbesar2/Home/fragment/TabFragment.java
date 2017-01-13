@@ -34,7 +34,7 @@ public class TabFragment extends Fragment {
 //        iki gae nge-set Adapter View Pager
         viewPager.setAdapter(new MyAdapter(getChildFragmentManager()));
 
-//        setupviewpager iku ndak jalan kalau ndak ada skrip ngisor iki, runnable
+//        ketika klik tab maka pager akan menyusuaikan
         tabLayout.post(new Runnable() {
             @Override
             public void run() {

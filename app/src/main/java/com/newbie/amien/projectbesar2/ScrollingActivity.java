@@ -105,10 +105,11 @@ public class ScrollingActivity extends AppCompatActivity {
         img = (ImageView) findViewById(R.id.header_logo);
 
         getSupportActionBar().setTitle("");
+        ApiClient a = new ApiClient(); //buat ngambil alamat
 
-        Toast.makeText(this, ""+i.getStringExtra("image"), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, ""+"http://localhost:8080/public/"+i.getStringExtra("image"), Toast.LENGTH_LONG).show();
         Picasso.with(getApplicationContext())
-                .load(i.getStringExtra("image"))
+                .load(a.BASE_URL.toString()+"public/"+i.getStringExtra("image"))
                 .into(img);
         mMapDetail = (MapView) findViewById(R.id.mapDetail);
         mMapDetail.onCreate(savedInstanceState);
@@ -172,29 +173,27 @@ public class ScrollingActivity extends AppCompatActivity {
     }
 
     public void aturfasilitas(){
+
         Intent i = getIntent();
         i_kasur = (LinearLayout) findViewById(R.id.ic_kasur);
         i_almari = (LinearLayout) findViewById(R.id.ic_almari);
         i_kmandi = (LinearLayout) findViewById(R.id.ic_kamarmandi);
-        i_meja = (LinearLayout) findViewById(R.id.ic_meja);
+        i_meja  = (LinearLayout) findViewById(R.id.ic_meja);
         i_kursi = (LinearLayout) findViewById(R.id.ic_kursi);
         i_televisi = (LinearLayout) findViewById(R.id.ic_televisi);
         i_ac = (LinearLayout) findViewById(R.id.ic_ac);
         matikanfasilitas();
         String fasilitas= i.getStringExtra("fasilitas");
         if(!fasilitas.isEmpty()){
-            if(fasilitas.split(",")[0].equals("1")){
+            if(fasilitas.split(",")[0].equals("1")) {
                 i_kasur.setVisibility(View.VISIBLE);
             }
-
             if(fasilitas.split(",")[1].equals("1")){
                 i_almari.setVisibility(View.VISIBLE);
             }
-
             if(fasilitas.split(",")[2].equals("1")){
                 i_kmandi.setVisibility(View.VISIBLE);
             }
-
             if(fasilitas.split(",")[3].equals("1")){
                 i_meja.setVisibility(View.VISIBLE);
             }

@@ -10,6 +10,8 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Build;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
@@ -38,9 +40,12 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 
 import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.maps.android.SphericalUtil;
 import com.newbie.amien.projectbesar2.Home.adapter.KostAdapter;
 import com.newbie.amien.projectbesar2.R;
 import com.newbie.amien.projectbesar2.ScrollingActivity;
@@ -56,18 +61,21 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+
+import static android.content.Context.LOCATION_SERVICE;
 import static com.newbie.amien.projectbesar2.R.drawable.marker2;
 
 /**
  * Created by amien on 11/12/16.
  */
 
-public class MapFragment extends Fragment implements LocationListener {
+public class MapFragment extends Fragment { //implements LocationListener
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager mLayoutmanager;
     private RecyclerView.Adapter mAdapter;
     private List<Kost> myKosts = new ArrayList<>();
     private Kost kost;
+    double myLat=0, myLng=0;
     LocationManager locationManager;
     String mprovider;
     ApiInterface mApiInterface;
@@ -75,7 +83,8 @@ public class MapFragment extends Fragment implements LocationListener {
     LatLng myloca;
     MapView mMapView;
     private GoogleMap googleMap;
-
+//    private LocationManager locationManager;
+    private LocationListener listener;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -85,28 +94,86 @@ public class MapFragment extends Fragment implements LocationListener {
 
         mMapView.onResume();
 
-        locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-        Criteria criteria = new Criteria();
+        locationManager = (LocationManager) getActivity().getSystemService(LOCATION_SERVICE);
 
-        mprovider = locationManager.getBestProvider(criteria, false);
 
-        if (mprovider != null && !mprovider.equals("")) {
-            if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                return null;
+        listener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+//                t.append("\n " + location.getLongitude() + " " + location.getLatitude());
+                if(myLat==0 && myLng==0) {
+                    Toast.makeText(getContext(), "" + location.getLatitude() + "  " + location.getLongitude(), Toast.LENGTH_LONG).show();
+                    myLat = location.getLatitude();
+                    myLng = location.getLongitude();
+                    prepareallmap();
+                }
             }
-            Location location = locationManager.getLastKnownLocation(mprovider);
-            locationManager.requestLocationUpdates(mprovider, 360000, 1, this);
 
-            if (location != null)
-                onLocationChanged(location);
-            else
-                Toast.makeText(getContext(), "No Location Provider Found Check Your Code", Toast.LENGTH_SHORT).show();
-        }
+            @Override
+            public void onStatusChanged(String s, int i, Bundle bundle) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String s) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String s) {
+
+                Intent i = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                startActivity(i);
+            }
+        };
+
+        configure_button();
+//        locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+//        Criteria criteria = new Criteria();
+//
+//        mprovider = locationManager.getBestProvider(criteria, false);
+//
+//        if (mprovider != null && !mprovider.equals("")) {
+//            if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//                return null;
+//            }
+//            Location location = locationManager.getLastKnownLocation(mprovider);
+//            locationManager.requestLocationUpdates(mprovider, 1000, 1, this);
+//
+//            if (location != null)
+//                onLocationChanged(location);
+//            else
+//                Toast.makeText(getContext(), "No Location Provider Found Check Your Code", Toast.LENGTH_SHORT).show();
+//        }
+
         prepareallmap();
         return rootView;
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode){
+            case 10:
+                configure_button();
+                break;
+            default:
+                break;
+        }
+    }
+    void configure_button(){
+        // first check for permissions
+        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.INTERNET}
+                        ,10);
+            }
+            return;
+        }
 
+            locationManager.requestLocationUpdates("gps", 5000, 0, listener);
+
+
+    }
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -125,7 +192,7 @@ public class MapFragment extends Fragment implements LocationListener {
                         List<com.newbie.amien.projectbesar2.data.retrofit.Kost> r_kostlist = response.body().getKost();
                         myKosts=r_kostlist;
                         googleMap.clear();
-                        Toast.makeText(getContext(), ""+myKosts.size()+":"+myKosts.get(0).getNamaKost(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), ""+search.getQuery(), Toast.LENGTH_LONG).show();
                         for (int i=0; i<myKosts.size(); i++){
 
                             String harga = null;
@@ -206,26 +273,26 @@ public class MapFragment extends Fragment implements LocationListener {
     }
 
 
-    @Override
-    public void onLocationChanged(Location location) {
-
-        myloca = new LatLng(location.getLatitude(),location.getLongitude());
-    }
-
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-
-    }
-
-    @Override
-    public void onProviderEnabled(String provider) {
-
-    }
-
-    @Override
-    public void onProviderDisabled(String provider) {
-
-    }
+//    @Override
+//    public void onLocationChanged(Location location) {
+//
+//        myloca = new LatLng(location.getLatitude(),location.getLongitude());
+//    }
+//
+//    @Override
+//    public void onStatusChanged(String provider, int status, Bundle extras) {
+//
+//    }
+//
+//    @Override
+//    public void onProviderEnabled(String provider) {
+//
+//    }
+//
+//    @Override
+//    public void onProviderDisabled(String provider) {
+//
+//    }
 
     public void prepareallmap(){
         mMapView.getMapAsync(new OnMapReadyCallback() {
@@ -241,15 +308,26 @@ public class MapFragment extends Fragment implements LocationListener {
                 googleMap.setMyLocationEnabled(true);
                 CameraPosition cameraPosition;
                 // For dropping a marker at a point on the Map
-                if(myloca!=null) {
-                    LatLng myLocation = new LatLng(myloca.latitude, myloca.longitude);
-                    cameraPosition = new CameraPosition.Builder().target(myLocation).zoom(14).build();
+//
+                    LatLng myLocation = new LatLng(myLat, myLng);
+                    cameraPosition = new CameraPosition.Builder().target(myLocation).zoom(2).build();
                     googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-                }
-
+//                }
+//                Toast.makeText(getContext(), ""+googleMap.getMyLocation().getLatitude(), Toast.LENGTH_SHORT).show();
                 CameraPosition PosisiTempat;
-
-
+                googleMap.addCircle(new CircleOptions()
+                        .center(new LatLng(myLat, myLng))
+                        .radius(10000)
+                        .strokeColor(Color.argb(90,255,189,31))
+                        .fillColor(Color.argb(60,255,189,31))
+                        .strokeWidth((float) 2));
+                googleMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
+                    @Override
+                    public boolean onMyLocationButtonClick() {
+//                        Toast.makeText(getContext(), ""+googleMap.getMyLocation().getLatitude(), Toast.LENGTH_SHORT).show();
+                        return false;
+                    }
+                });
 
                 mApiInterface = ApiClient.getClient().create(ApiInterface.class);
                 Call<GetKost> kostCall = mApiInterface.getKost();
@@ -281,13 +359,19 @@ public class MapFragment extends Fragment implements LocationListener {
                                 harga = myKosts.get(i).getHarga().substring(0,1)+"rb";
                             }
 
-                            googleMap.addMarker(new MarkerOptions()
-                                    .position(new LatLng(Double.parseDouble(myKosts.get(i).getLatitude()), Double.parseDouble(myKosts.get(i).getLongtitude())))
-                                    .title(myKosts.get(i).getNamaKost()).snippet(harga).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)))
-                                    .setTag(myKosts.get(i));
 
+                            if (SphericalUtil.computeDistanceBetween(new LatLng(myLat,myLng), new LatLng(Double.parseDouble(myKosts.get(i).getLatitude()), Double.parseDouble(myKosts.get(i).getLongtitude()))) < 10000) {
+//                                marker.setVisible(true);
+                                googleMap.addMarker(new MarkerOptions()
+                                        .position(new LatLng(Double.parseDouble(myKosts.get(i).getLatitude()), Double.parseDouble(myKosts.get(i).getLongtitude())))
+                                        .title(myKosts.get(i).getNamaKost()).snippet(harga).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)))
+                                        .setTag(myKosts.get(i));
+                            }
 
                         }
+
+
+
 
                     }
 

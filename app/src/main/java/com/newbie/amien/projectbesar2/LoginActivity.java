@@ -72,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
 //                            Toast.makeText(getApplicationContext(), ""+response.body().getJumlah(), Toast.LENGTH_SHORT).show();
                             if(response.body().getJumlah()>0) {
 //                                Toast.makeText(LoginActivity.this, "" + response.body().getPemilik().get(0).getId(), Toast.LENGTH_SHORT).show();
-                                SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+                                SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode where the created file can only be accessed by the calling application
                                 SharedPreferences.Editor editor = pref.edit();
                                 editor.putString("Id", response.body().getUser().get(0).getId());
                                 editor.putString("Email", response.body().getUser().get(0).getEmail());

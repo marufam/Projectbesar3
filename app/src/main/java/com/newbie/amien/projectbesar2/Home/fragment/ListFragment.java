@@ -102,7 +102,7 @@ public class ListFragment extends Fragment {
                     public void onResponse(Call<GetKost> call, Response<GetKost> response) {
 
                         List<com.newbie.amien.projectbesar2.data.retrofit.Kost> r_kostlist = response.body().getKost();
-                        Toast.makeText(getContext(), ""+r_kostlist.get(0).getKota(), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getContext(), ""+r_kostlist.get(0).getKota(), Toast.LENGTH_SHORT).show();
                         mAdapter = new KostAdapter(myKosts_cari);
                         mAdapter = new KostAdapter(r_kostlist);
                         recyclerView.setAdapter(mAdapter);

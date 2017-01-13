@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.newbie.amien.projectbesar2.R;
 import com.newbie.amien.projectbesar2.ScrollingActivity;
+import com.newbie.amien.projectbesar2.data.rest.ApiClient;
 import com.newbie.amien.projectbesar2.data.retrofit.Kost;
 import com.squareup.picasso.Picasso;
 
@@ -51,10 +52,12 @@ public class KostAdapter extends RecyclerView.Adapter<KostAdapter.ListItemViewHo
     @Override
     public void onBindViewHolder(ListItemViewHolder viewHolder, int position) {
 //        context = viewHolder.imageView.getContext();
+        ApiClient a = new ApiClient(); //buat ngambil alamat
+
         final Kost model = items.get(position);
         viewHolder.nama_kost.setText(String.valueOf(model.getNamaKost()));
         Picasso.with(viewHolder.imageView.getContext())
-                .load(model.getImage())
+                .load(a.BASE_URL.toString()+"public/"+model.getImage())
                 .into(viewHolder.imageView);
         String harga = null;
         if(model.getHarga().length()>=7){
